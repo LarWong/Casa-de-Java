@@ -4,6 +4,12 @@ Larry Wong
 Alvin Ye
 Pd. 8
 ---------------------
+=== processing Ideas ====
+-Space Invaders
+-Snake
+
+== Java Ideas ===
+- chess
 
 
 /////////// Zone of Reflection \\\\\\\\\\\
