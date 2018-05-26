@@ -20,4 +20,4 @@ Alvin Ye
 
 ## Tasks
 
-- [] some task
+- [ ] some task
