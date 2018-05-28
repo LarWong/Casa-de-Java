@@ -10,14 +10,10 @@ Larry Wong
 
 Alvin Ye
 
-## Project Ideas
-
-- Games
-  - Space Invaders
-  - Snake
-  - Chess
-- Simulations maybe?
-
 ## Tasks
 
 - [ ] some task
+
+## Installing and Running
+
+## How to Play
