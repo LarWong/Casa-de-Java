@@ -25,7 +25,7 @@ class enemy {
     this.xVel = 5;
     this.yVel = 0;
     this.c = color(random(0, 256), random(0, 256), random(0, 256));
-    this.size = 50;//random(5, 50);
+    this.size = 50;
     this.xCor = 50;
     this.yCor = 50;
   }
@@ -47,8 +47,11 @@ class enemy {
     if (this.state == MOVING) {
       if (this.xCor > width - this.size || this.xCor < this.size) { 
         this.xVel = -this.xVel;
-        this.yCor += 50;
-        health--;
+        this.yCor += 100;
+      }
+      if(this.yCor > height - this.size){
+         health--;
+         this.state = DEAD;
       }
       if (this.yCor > height - this.size || this.yCor < this.size) this.yVel = -this.yVel;
       //normal moving
