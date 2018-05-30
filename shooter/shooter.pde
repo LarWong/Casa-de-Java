@@ -23,12 +23,13 @@ void setup() {
   //text("Hello World", 350, 250);
   //text("Woo baby!", width / 2.0, height / 2.0);
 
-  enemies = new enemy[1];
+  enemies = new enemy[100];
+  allies = new ally[100];
+
   for (int i = 0; i < 1; i++) {
     enemies[i] = new enemy(0);
     existingEnemyBalls++;
   }
-  allies = new ally[1];
   for (int i = 0; i < 1; i++) {
     allies[i] = new ally(0);
     existingAllyBalls++;
@@ -43,6 +44,7 @@ void draw() {
   for (int ball = 0; ball < existingAllyBalls; ball++) {
     allies[ball].move();
   }
+  //health status
   font = createFont("Ancient.ttf", 36, true);
   textFont(font);
   text("Health: " + health, 800, 40);

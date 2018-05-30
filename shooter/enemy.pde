@@ -47,6 +47,7 @@ class enemy {
     if (this.state == MOVING) {
       if (this.xCor > width - this.size || this.xCor < this.size) { 
         this.xVel = -this.xVel;
+        this.yCor += 50;
         health--;
       }
       if (this.yCor > height - this.size || this.yCor < this.size) this.yVel = -this.yVel;
