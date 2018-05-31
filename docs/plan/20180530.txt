@@ -1,0 +1,21 @@
+CasaDeJava -- Kevin Wang, Larry Wong, Alvin Ye
+APCS2 Pd. 8
+2018-05-30
+
+Which jobs are most crucial?
+  - The most crucial job right now is research. We need to plan out how certain aspects of the game will run using the references and the tutorials on processing.org.
+  - The second crucial job at the moment is to create a minimum viable product. We aim to create the bare bones of the program.
+  - The jobs that are assigned at the moment are:
+          1) creation of the enemy and the movement of "enemies" across a path.
+          2) creating a path finding algorithm using pixel colors
+Which components constitute core functionality (vs non-essential)?
+  - At the bare minimum, the core functionalities are the movement of enemies along a path, object collision, object detection and the placement of objects.
+  - Non-essential (not necessary for MVP) are the map creation, the reading of .txt files, and upgrading towers/enemies.
+Which components are prerequisites for others?
+  - Before objects can be upgraded, they must be able to be placed in the environment and must be able to recognize other objects.
+  - Path finding requires an algorithm to detect where to go based on background pixel colors
+  - Map creation needs the functionality of .txt reading.
+Which tasks can be delegated, and which must be collaboratively tackled?
+  - At the moment, the path finding algorithm, Map creation, and .txt reading can be delegated since it is not crucial to develop the functionality of the objects.
+  - Research needs to be tackled collectively in order to plan out aspects of the whole program.
+  - Development of the object must be done collectively to that everyone knows how to incorporate their delegated tasks into them.
