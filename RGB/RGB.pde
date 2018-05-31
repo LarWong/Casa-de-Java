@@ -1,5 +1,5 @@
 void setup(){
-  background(100,0,0);
+  background(100,125,0);
   rect(10,10,10,10);
   frameRate(5);
 }
@@ -11,7 +11,7 @@ void draw(){
   print(blue(get(i,i))  + " ");
   print(green(get(i,i))  + " ");
   print("\n");
-  background(-10223616);
+  //background();
   i+=10;
 
 }
