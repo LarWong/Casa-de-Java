@@ -21,7 +21,7 @@ void setup() {
 
   background(15, 15, 15);
   noStroke();
-  frameRate(240); //adjust for developer testing
+  //frameRate(240); //adjust for developer testing
 
   /******************************
    creates antialiased font

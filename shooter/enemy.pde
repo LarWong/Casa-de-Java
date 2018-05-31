@@ -44,7 +44,7 @@ class enemy {
     if (this.state == MOVING) {
       if (this.xCor > width - this.size || this.xCor < this.size) { //move in a zigzag pattern 
         this.xVel *= -1;
-        yCor += 2 * this.size;
+        yCor += 100;
       }
       if (this.yCor > height - this.size) {
         health--; //user loses health
