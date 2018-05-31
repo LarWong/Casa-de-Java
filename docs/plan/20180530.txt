@@ -8,17 +8,25 @@ Which jobs are most crucial?
   - The jobs that are assigned at the moment are:
           1) creation of the enemy and the movement of "enemies" across a path.
           2) creating a path finding algorithm using pixel colors
+
 Which components constitute core functionality (vs non-essential)?
-  - At the bare minimum, the core functionalities are the movement of enemies along a path, object collision, object detection and the placement of objects.
+  - At the bare minimum, the core functionalities are the movement of enemies along a path, object interactions and the placement of objects.
   - Non-essential (not necessary for MVP) are the map creation, the reading of .txt files, and upgrading towers/enemies.
+
 Which components are prerequisites for others?
   - Before objects can be upgraded, they must be able to be placed in the environment and must be able to recognize other objects.
   - Path finding requires an algorithm to detect where to go based on background pixel colors
-  - Map creation needs the functionality of .txt reading.
+  - Map creation needs the functionality of .txt reading (<-- Maybe)
+  - Specific subclasses of enemies/towers need a superclass
+  - Different difficulties require different generated environments and different enemy/tower classes 
+
 Which tasks can be delegated, and which must be collaboratively tackled?
   - At the moment, the path finding algorithm, Map creation, and .txt reading can be delegated since it is not crucial to develop the functionality of the objects.
   - Research needs to be tackled collectively in order to plan out aspects of the whole program.
   - Development of the object must be done collectively to that everyone knows how to incorporate their delegated tasks into them.
+  - Implementations of invidual enemy or tower subclasses can be delegated to group members since they all have similar functions, just different specific values/method implementations
+
 What is the timeline, and how does it accommodate setbacks, course changes?
   - The timeline is the linear representation of tasks and their due dates. It helps remind members of their tasks and helps them plan ahead (e.g. when to start the next step or when it is ok to combine code)
+  - The timeline might not be linear if different roles are delegated. In that case, the timeline may diverge and converge again.
   - The timeline, however, is not static. If there is a setback or a course change, tasks can be moved around on the timeline to give/remove time for tasks that have a higher priority than others. This way, it will ensure code functionality even if not all of the aspects of the program are incorporated.
