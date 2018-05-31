@@ -61,6 +61,6 @@ Alvin Ye :: Worked on adding details to proposal.
 2018-05-30
 ---------------------------------------
 Kevin Wang :: Initial balloon movement.
-Larry Wong ::
+Larry Wong :: Added plan for 2018-05-30, added submodule
 Alvin Ye ::
 =======================================
