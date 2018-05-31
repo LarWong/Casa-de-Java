@@ -1,4 +1,5 @@
-PFont font; //font class for Processing, must be located in sketch's "data" directory to load successfully
+PFont font72; //font class for Processing, must be located in sketch's "data" directory to load successfully
+PFont font36;
 
 enemy[] enemies; //list for enemy balloons
 int existingEnemyBalls = 0; //initialize # of balloons
@@ -8,7 +9,7 @@ int existingUserBalls = 0; //initialize # user stuff
 
 int health = 100; //initial HP of user
 
-int time = millis(); //time since start of program
+//int time = millis(); //time since start of program
 
 void setup() {
   /**********************************
@@ -16,20 +17,20 @@ void setup() {
    must be first thing in setup
    **********************************/
   //size(1000, 500);
-  size(1000, 500, P2D); //much faster than default renderer for most tasks, but sacrifices some visual quality for speed
-  //fullScreen(P2D);
+  //size(1000, 500, P2D); //much faster than default renderer for most tasks, but sacrifices some visual quality for speed
 
   background(15, 15, 15);
   noStroke();
-  //frameRate(240); //adjust for developer testing
+  frameRate(240); //adjust for developer testing
 
   /******************************
    creates antialiased font
    allows vector data to be used
    should be a .ttf or .otf file
    ******************************/
-  font = createFont("Ancient.ttf", 72, true);
-  textFont(font); //sets the current font that will be drawn with text()
+  font72 = createFont("Ancient.ttf", 72, true);
+  font36 = createFont("Ancient.ttf", 36, true);
+  textFont(font72); //sets the current font that will be drawn with text()
   //text("Hello World", 350, 250);
   //text("Woo baby!", width / 2.0, height / 2.0);
 
@@ -62,13 +63,12 @@ void draw() {
   }
 
   //health status
-  if (millis() - time >= 100) {
-    time = millis();
-    /*font = createFont("Ancient.ttf", 36, true);
-    textFont(font);
-    text("Health:" + health, 800, 40);*/
-    println(health);
-  }
+  textFont(font36);
+  //if (millis() - time >= 100) {
+  //  time = millis();
+  text("Health:" + health, 800, 40);
+  //  println(health);
+  //}
 }
 
 void mouseClicked() {
