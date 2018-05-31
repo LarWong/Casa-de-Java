@@ -19,3 +19,6 @@ Which tasks can be delegated, and which must be collaboratively tackled?
   - At the moment, the path finding algorithm, Map creation, and .txt reading can be delegated since it is not crucial to develop the functionality of the objects.
   - Research needs to be tackled collectively in order to plan out aspects of the whole program.
   - Development of the object must be done collectively to that everyone knows how to incorporate their delegated tasks into them.
+What is the timeline, and how does it accommodate setbacks, course changes?
+  - The timeline is the linear representation of tasks and their due dates. It helps remind members of their tasks and helps them plan ahead (e.g. when to start the next step or when it is ok to combine code)
+  - The timeline, however, is not static. If there is a setback or a course change, tasks can be moved around on the timeline to give/remove time for tasks that have a higher priority than others. This way, it will ensure code functionality even if not all of the aspects of the program are incorporated.
