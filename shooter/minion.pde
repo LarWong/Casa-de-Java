@@ -1,4 +1,4 @@
-class user {
+class minion {
 
   //============final vars for state=========================
 
@@ -8,53 +8,51 @@ class user {
 
   //=========================================================
 
-  //instance vars (user stuff info)
+  //instance vars (ball info & movement)
   int state;
   color c;
   float xCor, yCor;
+  float xVel, yVel;
   float size;
 
-  int existingMinionBalls;
-  minion[] minions = new minion[50]; //each ball has minions
-
-  //default constructor
-  user() {
-    this.state = ALIVE;
-    this.c = color(154, 235, 34);
-    this.size = 50;
+  //constructor with state var
+  minion(int stateVar) {
+    this.state = stateVar;
+    this.c = color(0, 0, 150);
+    this.size = 30;
+    this.xVel = 0;
+    this.yVel = -0.5;
     this.xCor = this.yCor = this.size;
-
-    existingMinionBalls = 0;
-    for (int i = 0; i < 10; i++) {
-      minions[i] = new minion(0, 50 * (i + 1), height - 100);
-      existingMinionBalls++;
-    }
   }
 
-  //overloaded constructor with mouse coordinates
-  user(int mX, int mY) {
-    this();
+  //overloaded constructor with state var and mouse coordinates
+  minion(int stateVar, int mX, int mY) {
+    this(stateVar);
     this.xCor = mX;
     this.yCor = mY;
   }
 
-  //determines user stuff activity
-  void run() {
-    //if collision happens
+  //determines ball movement
+  void move() {
+    //each ball checks for collision
     collide();
+
+    //normal movement
+    if (this.state == ALIVE) {
+      this.xCor += this.xVel;
+      this.yCor += this.yVel;
+    }
+
+    //the ball is dead, emulate a dead ball
+    if (this.state == DEAD) this.size = 0;
 
     fill(this.c);
     ellipse(this.xCor, this.yCor, this.size, this.size + 4);
-
-    //tell minions to move
-    for (int ball = 0; ball < existingMinionBalls; ball++) {
-      minions[ball].move();
-    }
   }
 
-  //if the user stuff hits enemy ball, user stuff shrinks
+  //if the minion ball hits enemy ball, minion ball shrinks
   void collide() {
-    if (this.state != DEAD) { //user stuff cannot be dead
+    if (this.state != DEAD) { //minion ball cannot be dead
       for (int other = 0; other < existingEnemyBalls; other++) {
         if (enemies[other].state != DEAD) { //enemy ball cannot be dead
 

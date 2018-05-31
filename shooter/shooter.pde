@@ -17,7 +17,7 @@ void setup() {
    must be first thing in setup
    **********************************/
   //size(1000, 500);
-  //size(1000, 500, P2D); //much faster than default renderer for most tasks, but sacrifices some visual quality for speed
+  size(1000, 500, P2D); //much faster than default renderer for most tasks, but sacrifices some visual quality for speed
 
   background(15, 15, 15);
   noStroke();
@@ -44,7 +44,7 @@ void setup() {
   //instantiate user stuff
   users = new user[50];
   for (int i = 0; i < 10; i++) {
-    users[i] = new user(0, 50 * (i + 1), height - 50);
+    users[i] = new user(50 * (i + 1), height - 50);
     existingUserBalls++;
   }
 }
@@ -59,7 +59,7 @@ void draw() {
 
   //user stuff move
   for (int ball = 0; ball < existingUserBalls; ball++) {
-    users[ball].move();
+    users[ball].run();
   }
 
   //health status

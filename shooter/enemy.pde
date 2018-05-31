@@ -2,20 +2,17 @@ class enemy {
 
   //============final vars for state=========================
 
-  final static int MOVING = 0;
+  final static int ALIVE = 0;
   final static int DEAD = 1;
   final static float CHANGE_FACTOR = 0.25; //change in radius
-  final static int MAX_RADIUS = 100;
 
   //=========================================================
 
   //vars (ball info & movement)
   int state;
   color c;
-  float xCor;
-  float yCor;
-  float xVel;
-  float yVel;
+  float xCor, yCor;
+  float xVel, yVel;
   float size;
 
   //constructor with state var
@@ -41,7 +38,7 @@ class enemy {
     collide();
 
     //if enemy ball does not collide with ally ball
-    if (this.state == MOVING) {
+    if (this.state == ALIVE) {
       if (this.xCor > width - this.size || this.xCor < this.size) { //move in a zigzag pattern 
         this.xVel *= -1;
         yCor += 100;
@@ -76,6 +73,20 @@ class enemy {
             this.size -= 2; //decrease size
             if (this.size <= 0)
               this.state = DEAD; //state change
+          }
+        }
+
+        for (int otherMinion = 0; otherMinion < users[other].existingMinionBalls; otherMinion++) {
+          if (users[other].minions[otherMinion].state != DEAD) {
+
+            float distance = pow(this.xCor - users[other].minions[otherMinion].xCor, 2) + pow(this.yCor - users[other].minions[otherMinion].yCor, 2); //edge of circle to egde of the other circle
+
+            //checks if the radii of the circles are close enough
+            if (distance <= CHANGE_FACTOR * pow(this.size + users[other].minions[otherMinion].size, 2)) {
+              this.size -= 1; //decrease size
+              if (this.size <= 0)
+                this.state = DEAD; //state change
+            }
           }
         }
       }
