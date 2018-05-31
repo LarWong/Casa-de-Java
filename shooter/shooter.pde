@@ -20,6 +20,7 @@ void setup() {
   size(1000, 500, P2D); //much faster than default renderer for most tasks, but sacrifices some visual quality for speed
 
   background(15, 15, 15);
+
   noStroke();
   frameRate(240); //adjust for developer testing
 
@@ -51,6 +52,16 @@ void setup() {
 
 void draw() {  
   clear(); //creates illusion of animation
+  
+  color c = color(150,150, 150);
+  for (int y = 25; y < height; y += 100 ) {
+    for ( int j = y; j < y + 50; j++) {
+      for (int x = 0; x < width; x++) {
+        set(x, j, c);
+      }
+    }
+  }
+
 
   //enemies move
   for (int ball = 0; ball < existingEnemyBalls; ball++) {
