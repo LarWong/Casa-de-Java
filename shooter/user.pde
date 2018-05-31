@@ -1,4 +1,4 @@
-class enemy {
+class user {
 
   //============final vars for state=========================
 
@@ -19,17 +19,16 @@ class enemy {
   float size;
 
   //constructor with state var
-  enemy(int stateVar) {
+  user(int stateVar) {
     this.state = stateVar;
-    this.xVel = 5;
-    this.yVel = 0;
-    this.c = color(255, 0, 0);
+    this.c = color(154, 235, 34);
     this.size = 50;
+    this.xVel = this.yVel = 0;
     this.xCor = this.yCor = this.size;
   }
 
   //overloaded constructor with state var and mouse coordinates
-  enemy(int stateVar, int mX, int mY) {
+  user(int stateVar, int mX, int mY) {
     this(stateVar);
     this.xCor = mX;
     this.yCor = mY;
@@ -40,18 +39,8 @@ class enemy {
     //each ball checks for collision
     collide();
 
-    //if enemy ball does not collide with ally ball
+    //normal movement
     if (this.state == MOVING) {
-      if (this.xCor > width - this.size || this.xCor < this.size) { //move in a zigzag pattern 
-        this.xVel *= -1;
-        yCor += 2 * this.size;
-      }
-      if (this.yCor > height - this.size) {
-        health--; //user loses health
-        this.state = DEAD;
-      }
-
-      //normal moving
       this.xCor += this.xVel;
       this.yCor += this.yVel;
     }
@@ -63,19 +52,19 @@ class enemy {
     ellipse(this.xCor, this.yCor, this.size, this.size + 4);
   }
 
-  //if enemy ball touches ally ball, enemy shrinks
+  //if the user ball hits enemy ball, user ball shrinks
   void collide() {
-    if (this.state != DEAD) { //enemy ball cannot be dead
-      for (int other = 0; other < existingUserBalls; other++) {
-        if (users[other].state != DEAD) {
-
-          float distance = pow(this.xCor - users[other].xCor, 2) + pow(this.yCor - users[other].yCor, 2); //edge of circle to egde of the other circle
-
+    if (this.state != DEAD) { //user ball cannot be dead
+      for (int other = 0; other < existingEnemyBalls; other++) {
+        if (enemies[other].state != DEAD) { //enemy ball cannot be dead
+        
+          float distance = pow(this.xCor - enemies[other].xCor, 2) + pow(this.yCor - enemies[other].yCor, 2); //edge of circle to egde of the other circle
+          
           //checks if the radii of the circles are close enough
-          if (distance <= CHANGE_FACTOR * pow(this.size + users[other].size, 2)) {
+          if (distance <= CHANGE_FACTOR * pow(this.size + enemies[other].size, 2)) {
             this.size -= 2; //decrease size
             if (this.size <= 0)
-              this.state = DEAD; //state change
+              this.state = DEAD; //change state
           }
         }
       }
