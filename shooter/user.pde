@@ -9,6 +9,7 @@ class user {
   //=========================================================
 
   //instance vars (user stuff info)
+  String name;
   int state;
   color c;
   float xCor, yCor;
@@ -18,7 +19,7 @@ class user {
   minion[] minions = new minion[50]; //each ball has minions
 
   //default constructor
-  user() {
+  user(float mX, float mY) {
     this.state = ALIVE;
     this.c = color(154, 235, 34);
     this.size = 50;
@@ -26,18 +27,20 @@ class user {
 
     existingMinionBalls = 0;
     for (int i = 0; i < 10; i++) {
-      minions[i] = new minion(0, 50 * (i + 1), height - 100);
+      minions[i] = new minion(0, mX, mY + 20);
       existingMinionBalls++;
     }
+    this.xCor = mX;
+    this.yCor = mY;
   }
 
-  //overloaded constructor with mouse coordinates
+  /*overloaded constructor with mouse coordinates
   user(int mX, int mY) {
     this();
     this.xCor = mX;
     this.yCor = mY;
   }
-
+  */
   //determines user stuff activity
   void run() {
     //if collision happens
@@ -51,6 +54,9 @@ class user {
       minions[ball].move();
     }
   }
+
+
+
 
   //if the user stuff hits enemy ball, user stuff shrinks
   void collide() {

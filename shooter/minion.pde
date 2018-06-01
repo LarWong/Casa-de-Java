@@ -26,7 +26,7 @@ class minion {
   }
 
   //overloaded constructor with state var and mouse coordinates
-  minion(int stateVar, int mX, int mY) {
+  minion(int stateVar, float mX, float mY) {
     this(stateVar);
     this.xCor = mX;
     this.yCor = mY;

@@ -83,9 +83,8 @@ void draw() {
 }
 
 void mouseClicked() {
-  //creates a new GROWING ball upon click
-  //enemies[existingEnemyBalls] = new enemy(0, mouseX, mouseY);
-  //existingEnemyBalls++;
+  users[existingUserBalls] = new user(mouseX, mouseY);
+  existingUserBalls++;
 }
 
 //requires P3D as renderer
