@@ -68,6 +68,6 @@ Alvin Ye ::
 2018-05-31
 ----------------------------------------------------------------------
 Kevin Wang :: Created "minions" to attack balloons by moving straight.
-Larry Wong ::
-Alvin Ye ::
+Larry Wong :: Worked on uml and flowchart
+Alvin Ye :: Worked on uml and flowchart
 ======================================================================
