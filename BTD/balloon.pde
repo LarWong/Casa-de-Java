@@ -11,7 +11,7 @@ class balloon extends enemy {
     size = 50;
   }
   
-  balloon(int mX, int mY) {
+  balloon(float mX, float mY) {
     this();
     xCor = mX;
     yCor = mY;

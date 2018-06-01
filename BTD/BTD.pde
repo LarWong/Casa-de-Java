@@ -1,13 +1,21 @@
 import java.util.ArrayList;
 
-//font for size 36 & 72, respectively
-PFont font36, font72; //font class for Processing, must be located in sketch's "data" directory to load successfully
+/*****************************************************************
+ font for size 36 & 72, respectively
+ font class for Processing
+ must be located in sketch's "data" directory to load successfully
+ *****************************************************************/
+PFont font36, font72;
 
 player player = new player();
 map map = new map();
 ArrayList<enemy> enemies; //for all enemies
 
-int milli = millis(); //time since start of program
+int time; //time since start of program
+
+boolean displayMsg;
+int startTime;
+final int DISPLAY_TIME = 2000;
 
 void setup() {
 
@@ -16,7 +24,7 @@ void setup() {
    must be first thing in setup
    ******************************************/
   //size(1000, 500);
-  size(1000, 500, P2D); //much faster than default renderer for most tasks, but sacrifices some visual quality for speed
+  //size(1000, 500, P2D); //faster than default renderer for most tasks, but sacrifices some visual quality for speed
 
   background(15); //not pure black
   //noStroke(); //disables outlines
@@ -31,20 +39,22 @@ void setup() {
   font36 = createFont("Ancient.ttf", 36, true);
   textFont(font72); //sets the current font that will be drawn with text()
 
-  //instantiate enemies
+  //create 10 enemies
   enemies = new ArrayList<enemy>();
-  for (int i = 0; i < 10; i++) { //creates 10 enemies
+  for (int i = 0; i < 10; i++) {
     enemies.add(new balloon(50 * (i + 1), 50));
   }
 }
 
 void draw() {
-  clear(); //creates illusion of animation
-  println(milli);
-  if (milli <= 50) {
-    text("Balloon Tower Defense", 250, 250);
-    milli = second();
-  }
+  //if (displayMsg) {
+  //  fill(255);
+  //  text("Ballon Tower Defense", 250, 50);
+  //} else {
+  //  fill(255);
+  //  text("Ballon Tower Defense", 250, 50);
+  //}
+  //clear(); //creates illusion of animation
 
   //enemies move
   //for (int ball = 0; ball < existingEnemies; ball++) {
@@ -66,13 +76,18 @@ void draw() {
 }
 
 void mouseClicked() {
+
+  if (displayMsg == false) {
+    displayMsg = true;
+  }
+
   //creates a new GROWING ball upon click
   //enemies[existingEnemies] = new enemy(0, mouseX, mouseY);
   //existingEnemies++;
 }
 
 //requires P3D as renderer
-void bored() {
+void whenImBored() {
   camera(0.0, 0.0, 200.0, 100.0, 50.0, 0.0, 0.0, 1.0, 0.0);
   rotateX(-PI/6);
   rotateY(PI/3);
