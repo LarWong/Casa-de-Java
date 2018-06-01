@@ -12,11 +12,12 @@ Alvin Ye
 
 ## Tasks
 
-- [ ] create enemy balloons and algo for movement of enemies across a path
-- [ ] allow upgrading of attacks and defenses
-- [ ] creating maps
+- [ ] create enemy balloons and algo for movement of balloons following a path
+- [ ] allow for upgrading of attacks and defenses
+- [ ] create different shapes to use in game
+- [ ] create maps
+- [ ] allow for reading of `.txt` files
 - [ ] create algo for path finding based on pixel colors
-- [ ] allow reading of `.txt` files
 
 ## Installing and Running
 
