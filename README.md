@@ -17,7 +17,7 @@ Alvin Ye
 - [ ] create different shapes to use in game
 - [ ] create maps
 - [ ] allow for reading of `.txt` files
-- [ ] create algo for path finding based on pixel colors
+- [ ] create algo for path finding based on backtracking
 
 ## Installing and Running
 
