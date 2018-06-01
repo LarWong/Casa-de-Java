@@ -1,17 +1,13 @@
+import java.util.ArrayList;
+
 //font for size 36 & 72, respectively
 PFont font36, font72; //font class for Processing, must be located in sketch's "data" directory to load successfully
 
-player player;
+player player = new player();
+map map = new map();
+ArrayList<enemy> enemies; //for all enemies
 
-//enemy[] enemies; //list for enemy balloons
-//int existingEnemyBalls = 0; //initialize # of balloons
-
-//user[] users; //list for user's stuff
-//int existingUserBalls = 0; //initialize # user stuff
-
-//int health = 100; //initial HP of user
-
-//int time = millis(); //time since start of program
+int milli = millis(); //time since start of program
 
 void setup() {
 
@@ -23,7 +19,7 @@ void setup() {
   size(1000, 500, P2D); //much faster than default renderer for most tasks, but sacrifices some visual quality for speed
 
   background(15); //not pure black
-  noStroke(); //disables outlines
+  //noStroke(); //disables outlines
   //frameRate(240); //adjust for developer testing
 
   /******************************
@@ -34,28 +30,24 @@ void setup() {
   font72 = createFont("Ancient.ttf", 72, true);
   font36 = createFont("Ancient.ttf", 36, true);
   textFont(font72); //sets the current font that will be drawn with text()
-  text("HELLO WORLD", 250, 250);
 
   //instantiate enemies
-  //enemies = new enemy[100];
-  //for (int i = 0; i < 10; i++) {
-  //  enemies[i] = new enemy(0, 50 * (i + 1), 50);
-  //  existingEnemyBalls++;
-  //}
-
-  //instantiate user stuff
-  //users = new user[100];
-  //for (int i = 0; i < 10; i++) {
-  //  users[i] = new user(50 * (i + 1), height - 50);
-  //  existingUserBalls++;
-  //}
+  enemies = new ArrayList<enemy>();
+  for (int i = 0; i < 10; i++) { //creates 10 enemies
+    enemies.add(new balloon(50 * (i + 1), 50));
+  }
 }
 
-void draw() {  
-  //clear(); //creates illusion of animation
+void draw() {
+  clear(); //creates illusion of animation
+  println(milli);
+  if (milli <= 50) {
+    text("Balloon Tower Defense", 250, 250);
+    milli = second();
+  }
 
   //enemies move
-  //for (int ball = 0; ball < existingEnemyBalls; ball++) {
+  //for (int ball = 0; ball < existingEnemies; ball++) {
   //  enemies[ball].move();
   //}
 
@@ -75,8 +67,8 @@ void draw() {
 
 void mouseClicked() {
   //creates a new GROWING ball upon click
-  //enemies[existingEnemyBalls] = new enemy(0, mouseX, mouseY);
-  //existingEnemyBalls++;
+  //enemies[existingEnemies] = new enemy(0, mouseX, mouseY);
+  //existingEnemies++;
 }
 
 //requires P3D as renderer
