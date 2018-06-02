@@ -14,6 +14,7 @@ Alvin Ye
 
 - [ ] create enemy balloons and algo for movement of balloons following a path
 - [ ] allow for upgrading of attacks and defenses
+- [ ] allow for different difficulties
 - [ ] create different shapes to use in game
 - [ ] create maps
 - [ ] allow for reading of `.txt` files
@@ -28,6 +29,8 @@ To download:
 In order to run the game, you must have Processing installed. It is recommended that you have Processing 3. You may find the download files [here](https://processing.org/download/). Open up `shooter.pde` in Processing and run it.
 
 ## How to Play
+
+Run the program and click your mouse to begin.
 
 ## Features
 
