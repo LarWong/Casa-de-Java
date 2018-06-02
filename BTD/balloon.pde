@@ -6,7 +6,7 @@ class balloon extends enemy {
     state = ALIVE;
     c = color(150, 0, 0);
     xCor = yCor = 50;
-    xVel = 0.5;
+    xVel = 2;
     yVel = 0;
     size = 50;
   }
