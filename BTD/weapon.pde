@@ -109,7 +109,27 @@ abstract class weapon {
 
   void upgrade() {
   }
-  
+
+  void collide() {
+    if (this.state != DEAD) { //weapon ball cannot be dead
+      for (enemy enemy : enemies) {
+        if (enemy.getState() != DEAD) { //enemy ball cannot be dead
+
+          float distance = pow(this.xCor - enemy.getXCor(), 2) + pow(this.yCor - enemy.getYCor(), 2); //edge of circle to egde of the other circle
+
+          //checks if the radii of the circles are close enough
+          if (distance <= 0.25 * pow(size + enemy.getSize(), 2)) {
+            size -= 2; //decrease size
+            if (size <= 0){
+              state = DEAD; //change state
+            }
+      //***NEED TO FIX THIS, MAKE ENEMY SMALLER****** enemy.setSize(enemy.getSize() - 2); //decrease size of enemy that is hit
+          }
+          
+        }
+      }
+    }
+  }
+
   abstract void move();
-  
 }

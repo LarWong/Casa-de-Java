@@ -13,15 +13,21 @@ class projectile extends weapon {
   }
 
   void move() {
-    fill(c);
+
+    collide();
+
     ellipse(xCor, yCor, size, size);
-    if (state == ALIVE){
+    if (state == ALIVE) {
       yCor -= speed;
     }
-    if(yCor > height || yCor < 0){
-     state = DEAD; 
-     size = 0;
+    if (yCor > height || yCor < 0) {
+      state = DEAD; 
+      size = 0;
     }
-    
   }
+
+
+
+  
+  
 }

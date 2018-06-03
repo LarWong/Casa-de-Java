@@ -103,11 +103,18 @@ abstract class enemy {
       }
     }
   }
-
-  void collide() {
+  
+  //WE DONT NEED COLLIDE. WEAPON HAS A COLLIDE METHOD ALREADY
+  void collide(){
   }
 
   void pop() {
     state = DEAD;
   }
 }
+
+
+
+ 
+  
+  
