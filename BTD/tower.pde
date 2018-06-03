@@ -4,7 +4,7 @@ abstract class tower {
   protected float xCor;
   protected float yCor;
 
-  ArrayList<weapon> weapons = new ArrayList<weapon>();
+  ArrayList<projectile> projectiles = new ArrayList<projectile>();
 
   float getCost() {
     return cost;

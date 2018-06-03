@@ -3,7 +3,7 @@ import java.util.ArrayList;
 class player {
 
   //instance vars
-  ArrayList<weapon> weapons;
+  ArrayList<projectile> projectiles;
   //ArrayList<enemy> enemies;
   ArrayList<tower> towers;
 
@@ -14,7 +14,7 @@ class player {
   //default constructor
   player() {
     money = 50;
-    weapons = new ArrayList<weapon>();
+    projectiles = new ArrayList<projectile>();
     towers = new ArrayList<tower>();
     health = 100;
   }
@@ -59,7 +59,7 @@ class player {
     return temp;
   }
 
-  //for buying weapons
+  //for buying projectiles
   void buy(float x, float y) {
     SmallTower  t = new SmallTower(x,y);
     setMoney(getMoney() - t.getCost()); 

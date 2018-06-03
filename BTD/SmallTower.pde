@@ -10,9 +10,9 @@ class SmallTower extends tower {
   //determines ball movement
   void run() {
     ellipse(xCor,yCor,50,50);
-    weapons.add(new projectile(xCor,yCor + 10)); 
-    for (weapon weapon : weapons) {
-      weapon.move();
+    projectiles.add(new WeakProjectile(xCor,yCor + 10)); 
+    for (projectile projectile : projectiles) {
+      projectile.move();
     }
   }
   

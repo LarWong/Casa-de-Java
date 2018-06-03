@@ -104,7 +104,7 @@ abstract class enemy {
     }
   }
   
-  //WE DONT NEED COLLIDE. WEAPON HAS A COLLIDE METHOD ALREADY
+  //WE DONT NEED COLLIDE. projectile HAS A COLLIDE METHOD ALREADY
   void collide(){
   }
 
