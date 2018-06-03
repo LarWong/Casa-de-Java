@@ -1,0 +1,22 @@
+CasaDeJava -- Kevin Wang, Larry Wong, Alvin Ye
+APCS2 Pd. 8
+2018-06-03
+
+Which jobs are most crucial?
+  - The most crucial job right now is creating the basic functions of the game such as the way towers react with enemies
+
+Which components constitute core functionality (vs non-essential)?
+  - At the bare minimum, the core functionalities are the movement of enemies along a path, object interactions and the placement of objects.
+  - Non-essential are the map creation, and tower/enemy subclasses subclasses
+
+Which components are prerequisites for others?
+  - Before objects can be upgraded, they must be able to be placed in the environment and must be able to recognize other objects.
+  - Path finding requires an algorithm to detect a path
+  - Specific subclasses of enemies/towers need a superclass
+  - Different difficulties require different generated environments and different enemy/tower classes 
+
+Which tasks can be delegated, and which must be collaboratively tackled?
+  - At the moment, the map generation can be delegated because it isn't super important yet
+  - Research needs to be tackled collectively in order to plan out aspects of the whole program.
+  - Implementations of invidual enemy or tower subclasses can be delegated to group members since they all have similar functions, just different specific values/method implementations
+
