@@ -11,7 +11,7 @@ abstract class weapon {
   protected float size;
   protected int atck;
   protected int speed;
-  protected int price;
+  protected int price; //DONT NEED PRICE 
 
   int getState() {
     return state;
@@ -38,7 +38,7 @@ abstract class weapon {
   }
 
   color setColor(color newC) {
-    int temp = c;
+    color temp = c;
     c = newC;
     return temp;
   }
@@ -109,4 +109,7 @@ abstract class weapon {
 
   void upgrade() {
   }
+  
+  abstract void move();
+  
 }

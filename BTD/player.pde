@@ -4,29 +4,37 @@ class player {
 
   //instance vars
   ArrayList<weapon> weapons;
-  int money;
+  //ArrayList<enemy> enemies;
+  ArrayList<tower> towers;
+
+  float money;
   int health;
   int level;
-
+  
   //default constructor
   player() {
     money = 50;
     weapons = new ArrayList<weapon>();
+    towers = new ArrayList<tower>();
     health = 100;
   }
 
   //overloaded constructor with money
-  player(int newMoney) {
+  player(float newMoney) {
     this();
     money = newMoney;
   }
 
-  int getMoney() {
+  float getMoney() {
     return money;
   }
+  
+  ArrayList<tower> getTowers(){
+    return towers;
+  }
 
-  int setMoney(int newMoney) {
-    int temp = money;
+  float setMoney(float newMoney) {
+    float temp = money;
     money = newMoney;
     return temp;
   }
@@ -52,9 +60,18 @@ class player {
   }
 
   //for buying weapons
-  void buy() {
+  void buy(float x, float y) {
+    SmallTower  t = new SmallTower(x,y);
+    setMoney(getMoney() - t.getCost()); 
+    towers.add(t);
   }
-
+  
+  void run(){
+    for(tower tower: towers){
+      tower.run();
+    }
+  }
+  
   void specialPower() {
   }
 }

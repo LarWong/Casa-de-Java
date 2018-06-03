@@ -7,6 +7,8 @@ import java.util.ArrayList;
  ***********************************************************************/
 PFont font24, font72;
 
+boolean clicked = false;
+
 //*************colors**************
 color crimson = color(220, 20, 60);
 color moss = color(173, 223, 173);
@@ -65,6 +67,8 @@ void setup() {
   }
 }
 
+
+
 void draw() {
 
   clear(); //creates illusion of animation
@@ -77,17 +81,18 @@ void draw() {
       displayTitle = false; //stop displaying title
     }
   }
-  
+
 
   //enemies move
   for (enemy enemy : enemies)
     enemy.move();
 
+  if (clicked) {
+    localPlayer.buy(mouseX,mouseY);
+    clicked = false;
+  }
 
-  //user stuff move
-  //for (int ball = 0; ball < existingUserBalls; ball++) {
-  //  users[ball].run();
-  //}
+  localPlayer.run();
 
 
   //health status
@@ -95,6 +100,7 @@ void draw() {
   if (millis() - time >= 10) { //updates every 10ms
     time = millis();
     text("Health:" + localPlayer.getHealth(), 880, 30);
+    text("Money:" + localPlayer.getMoney(), 880, 60);
     //println(localPlayer.getHealth()); //prints to console
   }
 }
@@ -107,6 +113,8 @@ void mouseClicked() {
     titleStartTime = millis();
     titleDisplayed += 1; //this prevents title from being displayed more than once
   }
+
+  clicked = true;
 
 
   //creates a new balloon upon click
