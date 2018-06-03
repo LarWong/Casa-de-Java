@@ -46,7 +46,7 @@ void saveMap() {
     String text = "";
     for (int j=0; j<cols; j++) {
       int currSquare = grid[j][i].getState();
-      println(currSquare);
+      //println(currSquare);
         if (currSquare == 0 || currSquare == 4 || currSquare == 5){
           text += "#";
         }
