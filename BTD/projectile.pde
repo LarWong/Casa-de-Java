@@ -11,7 +11,6 @@ abstract class projectile {
   protected float size;
   protected int atck;
   protected int speed;
-  protected int price; //DONT NEED PRICE 
 
   int getState() {
     return state;
@@ -93,15 +92,6 @@ abstract class projectile {
     return temp;
   }
 
-  int getPrice() {
-    return price;
-  }
-
-  int setPrice(int newPrice) {
-    int temp = price;
-    price = newPrice;
-    return temp;
-  }
 
   void atck(enemy enemy) {
     enemy.setHP(enemy.getHP() - atck);
@@ -119,17 +109,31 @@ abstract class projectile {
 
           //checks if the radii of the circles are close enough
           if (distance <= 0.25 * pow(size + enemy.getSize(), 2)) {
-            size -= 2; //decrease size
-            if (size <= 0){
-              state = DEAD; //change state
+            state = DEAD; //change state
+
+            enemy.setSize(enemy.getSize() - 5); //decrease size of enemy that is hit
+
+            if (enemy.getSize() == 0) {
+              enemy.setState(DEAD);
             }
-      //***NEED TO FIX THIS, MAKE ENEMY SMALLER****** enemy.setSize(enemy.getSize() - 2); //decrease size of enemy that is hit
           }
-          
         }
       }
     }
   }
 
-  abstract void move();
+
+  void move() {
+
+    collide();
+
+    ellipse(xCor, yCor, size, size);
+    if (state == ALIVE) {
+      yCor -= speed;
+    }
+    if (yCor > height || yCor < 0) {
+      state = DEAD; 
+      size = 0;
+    }
+  }
 }

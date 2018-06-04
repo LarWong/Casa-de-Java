@@ -93,8 +93,8 @@ abstract class enemy {
     if (state != DEAD) {
       xCor += xVel;
       yCor += yVel;
-      //ellipse(xCor, yCor, 10, 10);
-      image(img, xCor, yCor, 200, 150);
+      ellipse(xCor, yCor, size, size);
+      //image(img, xCor, yCor, size, size);
       if (xCor < size || xCor > width - size) {
         xVel *= -1;
         yCor += 90;
