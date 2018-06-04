@@ -5,6 +5,7 @@ abstract class enemy {
   protected final static int DEAD = 1;
 
   //instance vars
+  protected PImage img = loadImage("Enemy.png");
   protected int state;
   protected int HP = 100;
   protected color c;
@@ -92,7 +93,8 @@ abstract class enemy {
     if (state != DEAD) {
       xCor += xVel;
       yCor += yVel;
-      ellipse(xCor, yCor, 10, 10);
+      //ellipse(xCor, yCor, 10, 10);
+      image(img, xCor, yCor, 200, 150);
       if (xCor < size || xCor > width - size) {
         xVel *= -1;
         yCor += 90;

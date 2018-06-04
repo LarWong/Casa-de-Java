@@ -3,6 +3,7 @@ abstract class tower {
   protected float damage;
   protected float xCor;
   protected float yCor;
+  protected PImage img = loadImage("Tower.png");
 
   ArrayList<projectile> projectiles = new ArrayList<projectile>();
 

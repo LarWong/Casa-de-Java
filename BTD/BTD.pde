@@ -88,7 +88,7 @@ void draw() {
     enemy.move();
 
   if (clicked) {
-    localPlayer.buy(mouseX,mouseY);
+    localPlayer.buy(mouseX, mouseY);
     clicked = false;
   }
 
