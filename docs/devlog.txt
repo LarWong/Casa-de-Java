@@ -76,6 +76,13 @@ Alvin Ye :: Worked on uml and flowchart
 2018-06-01
 ______________________________________________
 Kevin Wang :: Created intro animations
-Larry Wong ::
+Larry Wong :: Worked on map creation
+Alvin Ye ::
+==============================================
+
+2018-06-02
+______________________________________________
+Kevin Wang :: 
+Larry Wong :: Map creation and map representation complete
 Alvin Ye ::
 ==============================================
