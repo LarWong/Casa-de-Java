@@ -11,12 +11,12 @@ PFont font24, font72;
  shapes used in program
  before a shape is used, must be loaded with loadShape() or created with createShape()
  *************************************************************************************/
-PShape tower;
+PShape tower, freezer, freezerInner, freezerOuter;
 
 //*************colors**************
 color crimson = color(220, 20, 60);
-color moss = color(173, 223, 173);
 color sapphire = color(8, 37, 103);
+color moss = color(173, 223, 173);
 color rose = color(255, 85, 163);
 color ice = color(212, 240, 255);
 color gold = color(212, 175, 55);
@@ -75,19 +75,27 @@ void setup() {
   tower = createShape();
   tower.beginShape();
   tower.fill(180);
-  tower.vertex(-15, 20);
-  tower.vertex(25, 20);
-  tower.vertex(25, -20);
-  tower.vertex(17, -20);
-  tower.vertex(17, -10);
-  tower.vertex(9, -10);
-  tower.vertex(9, -20);
-  tower.vertex(1, -20);
-  tower.vertex(1, -10);
-  tower.vertex(-7, -10);
-  tower.vertex(-7, -20);
-  tower.vertex(-15, -20);
+  tower.vertex(-18, 20);
+  tower.vertex(22, 20);
+  tower.vertex(22, -20);
+  tower.vertex(14, -20);
+  tower.vertex(14, -10);
+  tower.vertex(6, -10);
+  tower.vertex(6, -20);
+  tower.vertex(-2, -20);
+  tower.vertex(-2, -10);
+  tower.vertex(-8, -10);
+  tower.vertex(-8, -20);
+  tower.vertex(-18, -20);
   tower.endShape(CLOSE);
+  
+  freezer = createShape(GROUP);
+  freezerInner = createShape(ELLIPSE, 0, 0, 20, 20);
+  freezerInner.setFill(ice);
+  freezerOuter = createShape(ELLIPSE, 0, 0, 40, 40);
+  freezerOuter.setFill(sapphire);
+  freezer.addChild(freezerOuter);
+  freezer.addChild(freezerInner);
 
 
   //////////////////////////////////////////////////////////
