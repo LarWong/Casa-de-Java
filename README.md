@@ -13,6 +13,7 @@ Alvin Ye
 ## Tasks
 
 - [ ] create enemy balloons and algo for movement of balloons following a path
+- [ ] allow for validation of weapons location
 - [ ] allow for upgrading of attacks and defenses
 - [ ] allow for different difficulties
 - [ ] create different shapes to use in game
