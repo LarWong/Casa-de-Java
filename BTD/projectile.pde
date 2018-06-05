@@ -60,7 +60,7 @@ class projectile {
     collide(); //check for collision with enemy
     if (state != DEAD) {
       fill(c);
-      triangle(xCor, yCor, xCor + size, yCor, xCor + size / 2.0, yCor - size);
+      triangle(xCor - size / 2.0, yCor, xCor + size / 2.0, yCor, xCor + size / 4.0, yCor - size);
       xCor += xVel;
       yCor += yVel;
     }
@@ -83,6 +83,7 @@ class projectile {
             //////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////NOT ALWAYS
             enemy.pop(); //enemy is dead
+            localPlayer.setMoney(localPlayer.getMoney() + 10); //player gets money
           }
         }
       }
