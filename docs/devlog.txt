@@ -100,3 +100,10 @@ Kevin Wang :: Figured out how to shoot projectiles with cooldown time.
 Larry Wong ::
 Alvin Ye ::
 ======================================================================
+
+2018-06-05
+______________________________________________________________
+Kevin Wang :: Brought together title displaying with gameplay.
+Larry Wong ::
+Alvin Ye ::
+==============================================================
