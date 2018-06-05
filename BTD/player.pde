@@ -64,8 +64,10 @@ class player {
     }
   }
 
-  //for buying weapons
-  void buy() {
+  void buy(float x, float y) {
+    weapon  t = new tower(x, y);
+    setMoney(getMoney() - t.getPrice()); 
+    weapons.add(t);
   }
 
   void specialPower() {

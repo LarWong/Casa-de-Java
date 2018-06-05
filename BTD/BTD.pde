@@ -133,7 +133,7 @@ void mouseClicked() {
 
 
     //creates a new tower upon click
-    localPlayer.weapons.add(new tower(mouseX, mouseY));
+    localPlayer.buy(mouseX, mouseY);
 
 
     //creates a new balloon upon click
