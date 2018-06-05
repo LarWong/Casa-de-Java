@@ -2,23 +2,25 @@
 class CreateMap {
 
   private int boxsize, cols, rows;
-  Square[][] grid;
+  private Square[][] grid;
   boolean creationDone;
 
-  CreateMap(int worldsize, int squaresize) {
-    int boxsize = squaresize;
+  CreateMap(int worldsizeY, int worldsizeX, int squaresize) {
+    boxsize = squaresize;
     boolean creationDone = false;
-    cols = (worldsize/boxsize);
-    rows = (worldsize/boxsize);
+
+    rows = (worldsizeY/boxsize);
+    cols = (worldsizeX/boxsize);
     grid = new Square[rows][cols];
+
     for (int row = 0; row < rows; row++) {
-      for (int col = 0; col < rows; col++) {
-        grid[row][col] = new Square(row, col);
+      for (int col = 0; col < cols; col++) {
+        grid[row][col] = new Square(row, col, rows, cols, squaresize);
       }
     }
   }
 
-  void creationProcess() {
+  boolean creationProcess() {
     if (!creationDone) { 
       for (int i=0; i<rows; i++) {
         for (int j=0; j<cols; j++) {
@@ -28,6 +30,7 @@ class CreateMap {
     } else {
       printMap();
     }
+    return creationDone;
   }
 
   void saveMap() {
@@ -35,15 +38,14 @@ class CreateMap {
     for (int i=0; i<rows; i++) {
       String text = "";
       for (int j=0; j<cols; j++) {
-        int currSquare = grid[j][i].getState();
-        if (currSquare == 0 || currSquare == 4 || currSquare == 5) {
-          text += "#";
-        }
+        int currSquare = grid[i][j].getState();
+        println(currSquare);
         if (currSquare == 1 || currSquare == 3) {
           text += "*";
-        }
-        if (currSquare == 2) {
+        } else if (currSquare == 2) {
           text += "&";
+        } else {
+          text += "#";
         }
       }
       map.println(text);
@@ -63,19 +65,20 @@ class CreateMap {
         for (int ch = 0; ch < lines[textRow].length(); ch++) {
           x = ch*boxsize;
           char curr = lines[textRow].charAt(ch);
-          switch( curr ) {
+          switch(curr) {
           case '#': 
             c = color(0, 0, 0);
+            break;
           case '*': 
             c = color(255, 255, 255);
+            break;
           case '&': 
             c = color(255, 0, 0);
+            break;
+          case '@': 
+            c = color(0, 0, 255);
+            break;
           }
-          
-          if (textRow == 1 && ch == 1){
-            c = color(0,0,255);
-          }
-
           for (int xPixel = x; xPixel < x + boxsize; xPixel++) {
             for (int yPixel = y; yPixel < y + boxsize; yPixel++) {
               set(xPixel, yPixel, c);
@@ -93,27 +96,42 @@ class CreateMap {
 
 
   void mapClick(int xM, int yM) {
-    if (!creationDone) { 
-      //print(" " + mouseX + " " + mouseY);
+    if (!creationDone) {
+
+      if (xM > 0 && xM < (boxsize) && yM > 0 && yM < (boxsize)) {
+        clearThis();
+      }
+
       if (xM > (cols-1)*(boxsize) && xM < (cols)*(boxsize) && yM > (rows-1)*(boxsize) && yM < (rows)*(boxsize)) {
         saveMap();
-        DepthFirstChecker check = new DepthFirstChecker();
+        DepthFirstChecker check = new DepthFirstChecker(grid);
         if (check.checkMaze()) {
-          println("good MAP");
           creationDone = true;
+          println("good MAP");
         } else {
           println("Invaild MAP");
           creationDone = false;
         }
       }
+
       for (int i=0; i<rows-1; i++) {
         for (int j=0; j<cols-1; j++) {
-          int x = i*boxsize;
-          int y = j*boxsize;
+          int x = j*boxsize;
+          int y = i*boxsize;
           if (xM > x && xM < (x + boxsize) && yM > y && yM < (y + boxsize)) {
             grid[i][j].changeState();
           }
         }
+      }
+    }
+  }
+
+  void clearThis() {
+    for (int row = 0; row < rows; row++) {
+      for (int col = 0; col < cols; col++) {
+        if (grid[row][col].getState() == 1)
+          grid[row][col].changeState();
+        ;
       }
     }
   }

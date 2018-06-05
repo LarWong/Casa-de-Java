@@ -1,10 +1,3 @@
-/*
- Casa De Java - Kevin Wang, Larry Wong, Alvin Ye
- APCS2 pd8
- Lab4 - All That Bouncin’
- 2018-05-24
- */
-
 class Square {
 
   //============final vars=========================
@@ -14,29 +7,41 @@ class Square {
   final static int START = 3;
   final static int BORDER = 4;
   final static int CONFIRM = 5;
+  final static int CLEAR = 6;
+  final static int VISITED = 7;
   //===============================================
 
-  //vars (ball info & movement)
-  int state;
-  color c;
+  //vars 
+  private int state;
+  private int totalRows;
+  private int totalCols;
+  private int boxsize;
+  private color c;
 
-  //constructor with state var
-  Square(int row, int col) {
-    
-    this.state = WALL;// default option
+  //constructor
+  Square(int row, int col, int rows, int cols, int actualBoxsize) {
+
+    this.totalRows = rows;
+    this.totalCols = cols;
+    this.boxsize = actualBoxsize;
+
+    this.setState(WALL);// default option
     if (row == 0 || col == 0 || row == rows - 1 || col == cols - 1) { 
-      this.state = BORDER;
+      this.setState(BORDER);
     }
-    if ( (row == 1 && col == 1) ){
-      this.state = START;
-    }
-    if ( (row == rows - 2 && col == cols - 2) ){
-      this.state = END;
-    }
-    if ( ( row == rows-1 && col == cols-1) ){
-      this.state = CONFIRM;
+    if ( ( row == 0 && col == 0) ) {
+      this.setState(CLEAR);
     } 
-    
+    if ( (row == 1 && col == 1) ) {
+      this.setState(START);
+    }
+    if ( (row == rows - 2 && col == cols - 2) ) {
+      this.setState(END);
+    }
+    if ( ( row == rows-1 && col == cols-1) ) {
+      this.setState(CONFIRM);
+    } 
+
     this.changeColor();
   }
 
@@ -55,14 +60,47 @@ class Square {
     if (this.state == START) c = color(0, 0, 255); //blue
     if (this.state == BORDER) c = color(100, 100, 100); //grey
     if (this.state == CONFIRM) c = color(0, 130, 130); //cyan
+    if (this.state == CLEAR) c = color(130, 130, 0); //yellowish-green
+    if (this.state == VISITED) c = color(0, 0, 100);
   }
 
   void appear(int row, int col) {
+    this.changeColor();
     fill(this.c);
-    rect(row*boxsize, col*boxsize, boxsize, boxsize);
+    rect(col*boxsize, row*boxsize, boxsize, boxsize);
+  }
+
+  int getState() {
+    return this.state;
+  }
+
+  void setState(int changeState) {
+    switch(changeState) {
+    case 0: 
+      this.state = WALL;
+      break;
+    case 1: 
+      this.state = PATH;
+      break;
+    case 2: 
+      this.state = END;
+      break;
+    case 3: 
+      this.state = START;
+      break;
+    case 4: 
+      this.state = BORDER;
+      break;
+    case 5: 
+      this.state = CONFIRM;
+      break;
+    case 6: 
+      this.state = CLEAR;
+      break;
+    case 7: 
+      this.state = VISITED;
+      break;
+    }
   }
   
-  int getState(){
-    return state;
-  }
 }
