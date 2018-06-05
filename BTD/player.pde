@@ -58,8 +58,13 @@ class player {
     }
   }
 
-  void buy(float mX, float mY) {
-    weapon t = new tower(mX, mY);
+  void buy(float mX, float mY, float type) {
+    weapon t = new tower(mX,mY); //tower by default
+    if (type == TOWER) {
+      t = new tower(mX, mY);
+    } else if (type == FREEZER) {
+      t = new freezer(mX, mY);
+    }
     setMoney(getMoney() - t.getPrice()); 
     weapons.add(t);
   }

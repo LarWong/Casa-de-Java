@@ -40,7 +40,11 @@ player localPlayer = new player();
 map map = new map();
 ArrayList<enemy> enemies; //here lies all enemies
 
+//instance vars for buying system
+int TOWER = 1;
+int FREEZER = 2;
 
+int state = TOWER;
 
 void setup() {
 
@@ -88,7 +92,7 @@ void setup() {
   tower.vertex(-8, -20);
   tower.vertex(-18, -20);
   tower.endShape(CLOSE);
-  
+
   freezer = createShape(GROUP);
   freezerInner = createShape(ELLIPSE, 0, 0, 20, 20);
   freezerInner.setFill(ice);
@@ -129,6 +133,10 @@ void draw() {
     //side panel for UI
     fill(150);
     rect(1001, 0, 1200, 800);
+    fill(256, 0, 0);
+    rect(1025, 5, 150, 70); //panel for buying
+    fill(0, 256, 0);
+    rect(1025, 100, 150, 70);
 
 
     //////////////////////////////////////////////////////////
@@ -150,8 +158,10 @@ void draw() {
   if (millis() - time >= 10) { //updates every 10ms
     time = millis();
     fill(255);
-    text("Health:" + localPlayer.getHealth(), 1050, 30);
-    text("Money:" + localPlayer.getMoney(), 1050, 60);
+    text("Health:" + localPlayer.getHealth(), 850, 30);
+    text("Money:" + localPlayer.getMoney(), 850, 60);
+    text("Buy Tower", 1075, 50);
+    text("Buy Freezer", 1075, 150);
     //println("Health: " + localPlayer.getHealth() + " Money: " + localPlayer.getMoney()); //prints to console
   }
 }
@@ -165,10 +175,19 @@ void mouseClicked() {
     titleDisplayed += 1; //this prevents title from being displayed more than once
   } else {
 
-
+    if (mouseX > 1000) {
+      if (mouseX > 1025 && mouseY > 5 && mouseY < 75) {
+        state = TOWER;
+        println("Click a part of the map to buy a TOWER");
+      } else if (mouseX > 1025 && mouseY > 100 && mouseY < 170) {
+        state = FREEZER;
+        println("Click a part of the map to buy a FREEZER");
+      }
+    }
     //creates a new tower upon click if player has enough money
-    if (localPlayer.getMoney() >= 30) {
-      localPlayer.buy(mouseX, mouseY);
+    //if (localPlayer.getMoney() >= 30) {
+    else {    
+      localPlayer.buy(mouseX, mouseY, state);
     }
 
 
