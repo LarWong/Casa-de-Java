@@ -51,9 +51,9 @@ public class BreathFirstSearchSolver{
 
   }//end constructor
 
-  public Node getPathBFS(int xStart, int yStart) {
+  public Node getPathBFS(int colStart, int rowStart) {
 
-    Node start = new Node(xStart,yStart, null);
+    Node start = new Node(colStart,rowStart, null);
     queue.add( start );
 
     while( !queue.isEmpty() ) {
@@ -61,31 +61,32 @@ public class BreathFirstSearchSolver{
       Node current = queue.remove();
       int currX = current.getX();
       int currY = current.getY();
+      System.out.println(currX);
 
-      if (maze[currY][currX] == THE_EXIT) {
+      if (maze[currX][currY] == THE_EXIT) {
         return current;
       }
-      maze[currY][currX] = VISITED;
-      if(maze[currY+1][currX] == PATH || maze[currY+1][currX] == THE_EXIT) {
-        Node nextNode = new Node(currY+1, currX, current);
-        queue.add(nextNode);
-      }
-
-      if(maze[currY-1][currX] == PATH || maze[currY-1][currX] == THE_EXIT) {
-        maze[currY][currX] = VISITED;
-        Node nextNode = new Node(currY-1, currX, current);
-        queue.add(nextNode);
-      }
-
-      if(maze[currY][currX+1] == PATH || maze[currY][currX+1] == THE_EXIT) {
-        maze[currY][currX] = VISITED;
+      maze[currX][currY] = VISITED;
+      if(maze[currX+1][currY] == PATH || maze[currX+1][currY] == THE_EXIT) {
         Node nextNode = new Node(currY, currX+1, current);
         queue.add(nextNode);
       }
 
-      if(maze[currY][currX-1] == PATH || maze[currY][currX-1] == THE_EXIT) {
-        maze[currY][currX] = VISITED;
+      if(maze[currX-1][currY] == PATH || maze[currX-1][currY] == THE_EXIT) {
+        maze[currX][currY] = VISITED;
         Node nextNode = new Node(currY, currX-1, current);
+        queue.add(nextNode);
+      }
+
+      if(maze[currX][currY+1] == PATH || maze[currX][currY+1] == THE_EXIT) {
+        maze[currX][currY] = VISITED;
+        Node nextNode = new Node(currY+1, currX, current);
+        queue.add(nextNode);
+      }
+
+      if(maze[currX][currY-1] == PATH || maze[currX][currY-1] == THE_EXIT) {
+        maze[currX][currY] = VISITED;
+        Node nextNode = new Node(currY-1, currX, current);
         queue.add(nextNode);
       }
     }

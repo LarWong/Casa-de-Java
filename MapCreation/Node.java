@@ -23,6 +23,6 @@ public class Node {
   }
 
   public String toString() {
-    return "x = " + this.xCor + " y = " + this.yCor;
+    return "col = " + this.xCor + " row = " + this.yCor;
   }
 }
