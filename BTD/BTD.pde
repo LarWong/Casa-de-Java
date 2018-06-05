@@ -72,7 +72,7 @@ void setup() {
   //creates 10 enemies
   enemies = new ArrayList<enemy>();
   for (int i = 0; i < 10; i++) {
-    enemies.add(new balloon(50 * (i + 1), 50));
+    enemies.add(new bloon(50 * (i + 1), 50));
   }
 }
 
@@ -84,7 +84,7 @@ void draw() {
     if (displayTitle) { //shall I display title?
       fill(gold);
       textFont(font72); //sets the current font that will be drawn with text()
-      text("Balloon Tower Defense", 200, 250);
+      text("Bloon Tower Defense", 320, 270);
       if (time - titleStartTime > TITLE_TIME) { //has it been on screen for 2s?
         beginning = displayTitle = false; //stop displaying title
       }
@@ -136,8 +136,8 @@ void mouseClicked() {
     localPlayer.weapons.add(new tower(mouseX, mouseY));
 
 
-    //creates a new balloon upon click
-    //enemies.add(new balloon(mouseX, mouseY));
+    //creates a new bloon upon click
+    //enemies.add(new bloon(mouseX, mouseY));
   }
 }
 
