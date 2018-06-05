@@ -13,16 +13,16 @@ class Square {
 
   //vars 
   private int state;
-  private int totalRows;
-  private int totalCols;
+  private int rows;
+  private int cols;
   private int boxsize;
   private color c;
 
   //constructor
   Square(int row, int col, int rows, int cols, int actualBoxsize) {
 
-    this.totalRows = rows;
-    this.totalCols = cols;
+    this.rows = rows;
+    this.cols = cols;
     this.boxsize = actualBoxsize;
 
     this.setState(WALL);// default option

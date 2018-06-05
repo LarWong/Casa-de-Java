@@ -3,8 +3,8 @@
  *  Algorithm:
  * - Begin at the "start position"
  * - For each path space, check all four spaces immediately adjacent to the current space.
- *   - If one of these surrounding spaces is a "*", update the position to that space
- *   - Otherwise, if there are no * around, backtrack to the last spot with multiple options to move, similar to the knight's tour.
+ * - If one of these surrounding spaces is a "*", update the position to that space
+ * - Otherwise, if there are no * around, backtrack to the last spot with multiple options to move, similar to the knight's tour.
  * - Keep moving until the final position is reached, denoted with a "&"
  ***/
 class DepthFirstChecker {
@@ -26,7 +26,6 @@ class DepthFirstChecker {
   public DepthFirstChecker(Square[][] mazeInput) {
     // init 2D array to represent maze
     maze = mazeInput;
-
 
     /*
     height = 0;
@@ -78,7 +77,6 @@ class DepthFirstChecker {
         solve( currX-1, currY );
 
       maze[currX][currY].setState(VISITED_PATH);
-      print(maze[currX][currY].getState());
     }
     return;
   }
@@ -90,15 +88,3 @@ class DepthFirstChecker {
     return solved;
   }
 }//end of class DepthFirstChecker
-
-//DEBUGGING
-/*
-class MazeChecker{
- public static void main( String[] args ){
- //DEBUGGING
- 
- DepthFirstChecker test1 = new DepthFirstChecker("map.txt");
- System.out.println(test1.checkMaze());
- 
- }
- */

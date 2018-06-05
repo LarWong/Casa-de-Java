@@ -39,7 +39,6 @@ class CreateMap {
       String text = "";
       for (int j=0; j<cols; j++) {
         int currSquare = grid[i][j].getState();
-        println(currSquare);
         if (currSquare == 1 || currSquare == 3) {
           text += "*";
         } else if (currSquare == 2) {
@@ -52,7 +51,6 @@ class CreateMap {
     }
     map.flush();
     map.close();
-    creationDone = true;
   }
 
   void printMap() {
