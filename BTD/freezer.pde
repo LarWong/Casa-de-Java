@@ -34,10 +34,10 @@ class freezer extends weapon {
       for (enemy enemy : enemies) {
         if (enemy.getState() != DEAD) {
 
-          float distance = pow(this.xCor - enemy.xCor, 2) + pow(this.yCor - enemy.yCor, 2); //dist btwn projectile & center of enemy
+          float distance = pow(this.xCor - enemy.xCor, 2) + pow(this.yCor - enemy.yCor, 2) + 20; //dist btwn projectile & center of enemy
 
-          
-          
+
+
           //checks if dist is close enough
           if (distance <= pow(this.size + enemy.size, 2)) {
             //enemy.setHP(enemy.getHP() - atck);
@@ -47,10 +47,12 @@ class freezer extends weapon {
             //////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////NOT ALWAYS
             if (enemy.getXVel() > 1) {
-              enemy.setXVel(enemy.getXVel() - 0.05); //enemy slows down
+              enemy.setXVel(enemy.getXVel() - 0.5); //enemy slows down when traveling right
+            } else if (enemy.getXVel() < -1) { //enemy slows down when traveling left
+              enemy.setXVel(enemy.getXVel() + 0.5);
             }
           } else { //speed returns to normal
-            //enemy.setXVel(enemy.getOrigXVel());
+            enemy.setXVel(enemy.getOrigXVel());
           }
         }
       }

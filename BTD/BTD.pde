@@ -44,7 +44,12 @@ ArrayList<enemy> enemies; //here lies all enemies
 int TOWER = 1;
 int FREEZER = 2;
 
+//default state is TOWER
 int state = TOWER;
+
+
+
+//==================================================================================
 
 void setup() {
 
@@ -138,6 +143,14 @@ void draw() {
     fill(0, 256, 0);
     rect(1025, 100, 150, 70);
 
+    //temp path
+    fill(0, 0, 256);
+    rect(50, 25, 900, 50);
+    rect(50, 115, 900, 50);
+    rect(50, 205, 900, 50);
+    rect(50, 295, 900, 50);
+    rect(50, 385, 900, 50);
+
 
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
@@ -186,8 +199,25 @@ void mouseClicked() {
     }
     //creates a new tower upon click if player has enough money
     //if (localPlayer.getMoney() >= 30) {
-    else {    
-      localPlayer.buy(mouseX, mouseY, state);
+    else { 
+      //temp variables for the path Y-coordinates
+      int a = 25;
+      int b = 115;
+      int c = 205;
+      int d = 295;
+      int e = 385;
+      
+      //if it's on enemy path
+      if ((mouseY > a && mouseY < a + 50) ||
+        (mouseY > b && mouseY < b + 50) ||
+        (mouseY > c && mouseY < c + 50) ||
+        (mouseY > d && mouseY < d + 50) || 
+        (mouseY > e && mouseY < e + 50)) {
+        println("INVALID PLACEMENT");
+      }
+      else{
+       localPlayer.buy(mouseX, mouseY, state); 
+      }
     }
 
 
