@@ -1,31 +1,36 @@
-abstract class tower {
-  protected float cost;
-  protected float damage;
-  protected float xCor;
-  protected float yCor;
-  protected PImage img = loadImage("Tower.png");
+class tower extends weapon {
 
-  ArrayList<projectile> projectiles = new ArrayList<projectile>();
+  //has these vars inherited from weapon
+  //final static int ALIVE = 0;
+  //final static int DEAD = 1;
+  //int state = ALIVE;
+  //int HP;
+  //color c;
+  //float xCor, yCor;
+  //float size;
+  //int atck, speed, price;
+  //boolean fired;
+  //int lastFiredTime = millis();
+  //ArrayList<projectile> projectiles;
 
-  float getCost() {
-    return cost;
+  tower() {
+    HP = 100;
+    c = color(180);
+    size = 40;
+    atck = 10;
+    speed = 1;
+    price = 30;
   }
 
-  float getDamage() {
-    return damage;
+  tower(float mX, float mY) {
+    this();
+    xCor = mX;
+    yCor = mY;
   }
 
-  float setXCor(float x) {
-    float temp = xCor;
-    xCor = x; 
-    return temp;
+  void atck() {
+    fill(c);
+    rect(xCor, yCor, size, size); //shape of tower
+    super.atck();
   }
-
-  float setYCor(float y) {
-    float temp = yCor;
-    yCor = y; 
-    return temp;
-  }
-  
-  abstract void run();
 }

@@ -3,38 +3,35 @@ import java.util.ArrayList;
 class player {
 
   //instance vars
-  ArrayList<projectile> projectiles;
-  //ArrayList<enemy> enemies;
-  ArrayList<tower> towers;
+  private ArrayList<weapon> weapons;
+  private int money;
+  private int health;
+  private int level;
 
-  float money;
-  int health;
-  int level;
-  
   //default constructor
   player() {
+    weapons = new ArrayList<weapon>();
     money = 50;
-    projectiles = new ArrayList<projectile>();
-    towers = new ArrayList<tower>();
     health = 100;
+    level = 1;
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    weapons.add(new tower(500, 300));
   }
 
-  //overloaded constructor with money
-  player(float newMoney) {
-    this();
-    money = newMoney;
+  String getWeapons() {
+    return weapons.toString();
   }
 
-  float getMoney() {
+  int getMoney() {
     return money;
   }
-  
-  ArrayList<tower> getTowers(){
-    return towers;
-  }
 
-  float setMoney(float newMoney) {
-    float temp = money;
+  int setMoney(int newMoney) {
+    int temp = money;
     money = newMoney;
     return temp;
   }
@@ -59,19 +56,18 @@ class player {
     return temp;
   }
 
-  //for buying projectiles
-  void buy(float x, float y) {
-    SmallTower  t = new SmallTower(x,y);
-    setMoney(getMoney() - t.getCost()); 
-    towers.add(t);
-  }
-  
-  void run(){
-    for(tower tower: towers){
-      tower.run();
+  void play() {
+
+    //tell each weapon to attack
+    for (weapon weapon : weapons) {
+      weapon.atck();
     }
   }
-  
+
+  //for buying weapons
+  void buy() {
+  }
+
   void specialPower() {
   }
 }

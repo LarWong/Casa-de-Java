@@ -5,8 +5,7 @@ abstract class enemy {
   protected final static int DEAD = 1;
 
   //instance vars
-  protected PImage img = loadImage("Enemy.png");
-  protected int state;
+  protected int state = ALIVE;
   protected int HP = 100;
   protected color c;
   protected float xCor, yCor;
@@ -89,34 +88,30 @@ abstract class enemy {
     return temp;
   }
 
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
+  //////////////////////////////////////////////////////////
   void move() {
+    
     if (state != DEAD) {
       xCor += xVel;
       yCor += yVel;
-      ellipse(xCor, yCor, size, size);
-      //image(img, xCor, yCor, size, size);
-      if (xCor < size || xCor > width - size) {
+      fill(c);
+      ellipse(xCor, yCor, 30, 40); //UPDATE THIS LATER TO INCLUDE OTHER SHAPES
+      if (xCor < size || xCor > 1000 - size) {
         xVel *= -1;
         yCor += 90;
       }
-      if (yCor > height) {
+      if (yCor > 500 - size) {
         pop();
         localPlayer.setHealth(localPlayer.getHealth() - 1);
       }
     }
-  }
-  
-  //WE DONT NEED COLLIDE. projectile HAS A COLLIDE METHOD ALREADY
-  void collide(){
   }
 
   void pop() {
     state = DEAD;
   }
 }
-
-
-
- 
-  
-  
