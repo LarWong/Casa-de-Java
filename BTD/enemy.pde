@@ -10,6 +10,7 @@ abstract class enemy {
   protected color c;
   protected float xCor, yCor;
   protected float xVel, yVel;
+  protected float origXVel;
   protected float size;
 
   int getState() {
@@ -61,6 +62,10 @@ abstract class enemy {
   float getXVel() {
     return xVel;
   }
+  
+  float getOrigXVel(){
+     return origXVel; 
+  }
 
   float setXVel(float newXVel) {
     float temp = xVel;
@@ -102,6 +107,7 @@ abstract class enemy {
       ellipse(xCor, yCor, 30, 40); //UPDATE THIS LATER TO INCLUDE OTHER SHAPES
       if (xCor < size || xCor > 1000 - size) {
         xVel *= -1;
+        origXVel *= -1;
         yCor += 90;
       }
       if (yCor > 500 - size) {

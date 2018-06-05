@@ -19,6 +19,7 @@ class bloon extends enemy {
     //////////////////////////////////////////////////////////
     xCor = yCor = 50;
     xVel = 2;
+    origXVel = 2;
     yVel = 0;
     size = 50;
   }
