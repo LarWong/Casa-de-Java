@@ -7,6 +7,12 @@ import java.util.ArrayList;
  ***********************************************************************/
 PFont font24, font72;
 
+/*************************************************************************************
+ shapes used in program
+ before a shape is used, must be loaded with loadShape() or created with createShape()
+ *************************************************************************************/
+PShape tower;
+
 //*************colors**************
 color crimson = color(220, 20, 60);
 color moss = color(173, 223, 173);
@@ -62,6 +68,26 @@ void setup() {
    ******************************/
   font72 = createFont("Ancient.ttf", 72, true); //fancy little font
   font24 = createFont("San Francisco.ttf", 24, true);
+
+  /*************
+   creates tower
+   *************/
+  tower = createShape();
+  tower.beginShape();
+  tower.fill(180);
+  tower.vertex(-15, 20);
+  tower.vertex(25, 20);
+  tower.vertex(25, -20);
+  tower.vertex(17, -20);
+  tower.vertex(17, -10);
+  tower.vertex(9, -10);
+  tower.vertex(9, -20);
+  tower.vertex(1, -20);
+  tower.vertex(1, -10);
+  tower.vertex(-7, -10);
+  tower.vertex(-7, -20);
+  tower.vertex(-15, -20);
+  tower.endShape(CLOSE);
 
 
   //////////////////////////////////////////////////////////
@@ -132,8 +158,10 @@ void mouseClicked() {
   } else {
 
 
-    //creates a new tower upon click
-    localPlayer.buy(mouseX, mouseY);
+    //creates a new tower upon click if player has enough money
+    if (localPlayer.getMoney() >= 30) {
+      localPlayer.buy(mouseX, mouseY);
+    }
 
 
     //creates a new bloon upon click

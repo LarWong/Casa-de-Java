@@ -15,7 +15,6 @@ class tower extends weapon {
 
   tower() {
     HP = 100;
-    c = color(180);
     size = 40;
     atck = 10;
     speed = 1;
@@ -29,8 +28,7 @@ class tower extends weapon {
   }
 
   void atck() {
-    fill(c);
-    rect(xCor, yCor, size, size); //shape of tower
+    shape(tower, xCor, yCor); //shape of tower
     super.atck();
   }
 }

@@ -14,12 +14,6 @@ class player {
     money = 50;
     health = 100;
     level = 1;
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    weapons.add(new tower(500, 300));
   }
 
   String getWeapons() {
@@ -64,8 +58,8 @@ class player {
     }
   }
 
-  void buy(float x, float y) {
-    weapon  t = new tower(x, y);
+  void buy(float mX, float mY) {
+    weapon t = new tower(mX, mY);
     setMoney(getMoney() - t.getPrice()); 
     weapons.add(t);
   }
