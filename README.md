@@ -1,6 +1,6 @@
 # Casa-de-Java
 
-An APCS2 Final Project
+## BTD -- An APCS2 Final Project
 
 **Contributors:**
 
@@ -12,7 +12,7 @@ Alvin Ye
 
 ## Tasks
 
-- [ ] create enemy balloons and algo for movement of balloons following a path
+- [ ] create enemy bloons and algo for movement of bloons following a path
 - [ ] allow for validation of weapons location
 - [ ] allow for upgrading of attacks and defenses
 - [ ] allow for different difficulties
