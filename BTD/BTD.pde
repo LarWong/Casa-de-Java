@@ -134,7 +134,7 @@ void draw() {
 
       fill(gold);
       textFont(font72); //sets the current font that will be drawn with text()
-      text("Bloon Tower Defense", 120, 255);
+      text("Bloon Tower Defense", 220, 255);
       if (time - titleStartTime > TITLE_TIME) { //has it been on screen for 2s?
         beginning = displayTitle = false; //stop displaying title
       }
@@ -157,11 +157,11 @@ void draw() {
     //////////////////////////////////////////////////////////
     //temp path
     fill(0, 0, 256);
-    rect(50, 25, 900, 50);
-    rect(50, 115, 900, 50);
-    rect(50, 205, 900, 50);
-    rect(50, 295, 900, 50);
-    rect(50, 385, 900, 50);
+    rect(50, 25, 700, 50);
+    rect(50, 115, 700, 50);
+    rect(50, 205, 700, 50);
+    rect(50, 295, 700, 50);
+    rect(50, 385, 700, 50);
 
 
     //////////////////////////////////////////////////////////
