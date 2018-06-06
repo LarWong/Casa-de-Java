@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 /***********************************************************************
  fonts for size 36 & 72, respectively
- PFont is font class for Processing
+ PFont is font clsass for Processing
  fonts must be located in sketch's "data" directory to load successfully
  ***********************************************************************/
 PFont font24, font72;
@@ -27,6 +27,7 @@ int time = 0; //stores milliseconds since start of run
 
 
 
+//title display vars
 boolean displayTitle; //whether to display title, defaults to false
 int titleDisplayed; //whether title has been displayed -- 0 is false, any other # is true
 int titleStartTime; //time when title appeared
@@ -40,13 +41,13 @@ player localPlayer = new player();
 map map = new map();
 ArrayList<enemy> enemies; //here lies all enemies
 
-//instance vars for buying system
+//vars for buying system
 final int TOWER = 1;
 final int FREEZER = 2;
 final int TACKSHOOTER = 3;
 
-//default state is TOWER
-int state = TOWER;
+//default weapon state
+int weaponState = TOWER;
 
 
 
@@ -99,6 +100,9 @@ void setup() {
   tower.vertex(-18, -20);
   tower.endShape(CLOSE);
 
+  /***************
+   creates freezer
+   ***************/
   freezer = createShape(GROUP);
   freezerInner = createShape(ELLIPSE, 0, 0, 20, 20);
   freezerInner.setFill(ice);
@@ -125,27 +129,32 @@ void draw() {
   clear(); //creates illusion of animation
 
   if (beginning) {
+
     if (displayTitle) { //shall I display title?
+
       fill(gold);
       textFont(font72); //sets the current font that will be drawn with text()
-      text("Bloon Tower Defense", 320, 270);
+      text("Bloon Tower Defense", 320, 255);
       if (time - titleStartTime > TITLE_TIME) { //has it been on screen for 2s?
         beginning = displayTitle = false; //stop displaying title
       }
+      time = millis();
     }
   } else {
 
-
     //side panel for UI
     fill(150);
-    rect(1001, 0, 1200, 800);
-    fill(256, 0, 0);
-    rect(1025, 5, 150, 70); //panel for buying
-    fill(0, 256, 0);
-    rect(1025, 100, 150, 70);
-    fill(0,0,256);
-    rect(1025,195,150,70);
+    rect(1001, 0, 1200, 500);
+    shape(tower, 1051, 100);
+    shape(freezer, 1150, 100);
+    fill(0, 0, 255);
+    rect(1025, 195, 150, 70);
 
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
     //temp path
     fill(0, 0, 256);
     rect(50, 25, 900, 50);
@@ -166,21 +175,22 @@ void draw() {
 
 
     localPlayer.play();
-  }
 
 
-  //health status
-  textFont(font24);
-  if (millis() - time >= 10) { //updates every 10ms
-    time = millis();
-    fill(255);
-    text("Health:" + localPlayer.getHealth(), 850, 30);
-    text("Money:" + localPlayer.getMoney(), 850, 60);
-    text("Buy Tower", 1075, 50);
-    text("Buy Freezer", 1075, 150);
-    text("Buy Tack Shooter", 1075, 250);
-    //println("Health: " + localPlayer.getHealth() + " Money: " + localPlayer.getMoney()); //prints to console
+    //health status
+    textFont(font24);
+    if (millis() - time >= 10) { //updates every 10ms
+      time = millis();
+      fill(255);
+      text("Health:" + localPlayer.getHealth(), 1040, 30);
+      text("Money:" + localPlayer.getMoney(), 1040, 60);
+      //text("buy tower", 1075, 50);
+      //text("buy freezer", 1075, 150);
+      //text("buy tack shooter", 1075, 250);
+      //println("Health: " + localPlayer.getHealth() + " Money: " + localPlayer.getMoney()); //prints to console
+    }
   }
+  //println(mouseX + " " + mouseY); location of mouse
 }
 
 void mouseClicked() {
@@ -193,19 +203,24 @@ void mouseClicked() {
   } else {
 
     if (mouseX > 1000) {
-      if (mouseX > 1025 && mouseY > 5 && mouseY < 75) {
-        state = TOWER;
-        println("Click a part of the map to buy a TOWER");
-      } else if (mouseX > 1025 && mouseY > 100 && mouseY < 170) {
-        state = FREEZER;
-        println("Click a part of the map to buy a FREEZER");
-      }
-      else if(mouseX > 1025 && mouseY > 195 && mouseY < 265){
-       state = TACKSHOOTER;
-       println("Click a part of the map to buy a TACK SHOOTER");
+      if (mouseX >= 1032 && mouseX <= 1072 && mouseY >= 80 && mouseY <= 120) {
+        weaponState = TOWER;
+        println("place your tower");
+      } else if (mouseX >= 1130 && mouseX <= 1170 && mouseY >= 80 && mouseY <= 120) {
+        weaponState = FREEZER;
+        println("place your freezer");
+      }//////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      else if (mouseX > 1025 && mouseY > 195 && mouseY < 265) {
+        weaponState = TACKSHOOTER;
+        println("place your tack shooter");
       }
     }
-    //creates a new tower upon click if player has enough money
+
+    //creates a new weapon upon click if player has enough money
     //if (localPlayer.getMoney() >= 30) {
     else { 
       //temp variables for the path Y-coordinates
@@ -214,7 +229,7 @@ void mouseClicked() {
       int c = 205;
       int d = 295;
       int e = 385;
-      
+
       //if it's on enemy path
       if ((mouseY > a && mouseY < a + 50) ||
         (mouseY > b && mouseY < b + 50) ||
@@ -222,9 +237,8 @@ void mouseClicked() {
         (mouseY > d && mouseY < d + 50) || 
         (mouseY > e && mouseY < e + 50)) {
         println("INVALID PLACEMENT");
-      }
-      else{
-       localPlayer.buy(mouseX, mouseY, state); 
+      } else {
+        localPlayer.buy(mouseX, mouseY, weaponState);
       }
     }
 

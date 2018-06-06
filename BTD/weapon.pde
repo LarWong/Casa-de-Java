@@ -14,11 +14,7 @@ abstract class weapon {
   protected float size;
   protected int atck, speed, price;
   protected int lastFiredTime = millis();
-  protected ArrayList<projectile> projectiles;
-
-  weapon() {
-    projectiles = new ArrayList<projectile>();
-  }
+  protected ArrayList<projectile> projectiles = new ArrayList<projectile>();
 
   int getState() {
     return state;

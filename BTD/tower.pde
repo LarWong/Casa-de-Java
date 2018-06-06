@@ -11,7 +11,7 @@ class tower extends weapon {
   //int atck, speed, price;
   //boolean fired;
   //int lastFiredTime = millis();
-  //ArrayList<projectile> projectiles;
+  //protected ArrayList<projectile> projectiles = new ArrayList<projectile>();
 
   tower() {
     HP = 100;

@@ -11,7 +11,7 @@ class freezer extends weapon {
   //int atck, speed, price;
   //boolean fired;
   //int lastFiredTime = millis();
-  //ArrayList<projectile> projectiles;
+  //protected ArrayList<projectile> projectiles = new ArrayList<projectile>();
 
   freezer() {
     HP = 100;
@@ -35,8 +35,6 @@ class freezer extends weapon {
         if (enemy.getState() != DEAD) {
 
           float distance = pow(this.xCor - enemy.xCor, 2) + pow(this.yCor - enemy.yCor, 2) + 20; //dist btwn projectile & center of enemy
-
-
 
           //checks if dist is close enough
           if (distance <= pow(this.size + enemy.size, 2)) {

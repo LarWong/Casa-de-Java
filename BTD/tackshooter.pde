@@ -11,13 +11,13 @@ class tackshooter extends weapon {
   //int atck, speed, price;
   //boolean fired;
   //int lastFiredTime = millis();
-  //ArrayList<projectile> projectiles;
+  //protected ArrayList<projectile> projectiles = new ArrayList<projectile>();
 
   tackshooter() {
     HP = 100;
     size = 40;
     atck = 10;
-    speed = 1;
+    speed = 2;
     price = 100;
   }
 
@@ -29,7 +29,7 @@ class tackshooter extends weapon {
   
   
   void atck() {
-    ellipse(xCor,yCor, 20, 50);
+    ellipse(xCor, yCor, 20, 50);
     for (projectile projectile : projectiles) projectile.move(); //projectiles move
 
     if (time - lastFiredTime > 1200.0 / speed) { //weapon has certain cooldown
