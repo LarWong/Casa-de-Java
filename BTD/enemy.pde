@@ -105,7 +105,7 @@ abstract class enemy {
       yCor += yVel;
       fill(c);
       ellipse(xCor, yCor, 30, 40); //UPDATE THIS LATER TO INCLUDE OTHER SHAPES
-      if (xCor < size || xCor > 1000 - size) {
+      if (xCor < size || xCor > 800 - size) {
         xVel *= -1;
         origXVel *= -1;
         yCor += 90;

@@ -17,7 +17,7 @@ class tackshooter extends weapon {
     HP = 100;
     size = 40;
     atck = 10;
-    speed = 2;
+    speed = 1;
     price = 100;
   }
 
@@ -34,10 +34,12 @@ class tackshooter extends weapon {
 
     if (time - lastFiredTime > 1200.0 / speed) { //weapon has certain cooldown
       lastFiredTime = millis();
-      projectiles.add(new projectile(xCor, yCor - 10, speed, atck)); //create a new projectile
-      projectiles.add(new projectile(xCor - 10, yCor, speed, speed, atck));
-      projectiles.add(new projectile(xCor + 10, yCor, speed, speed, atck));
-      projectiles.add(new projectile(xCor, yCor + 10, speed, speed, atck));
+      projectiles.add(new projectile(xCor, yCor, speed, atck)); //create a new projectile
+      projectiles.add(new projectile(xCor, yCor, -1 * speed, speed, atck));
+      projectiles.add(new projectile(xCor, yCor, -1 * speed, -1 * speed, atck));
+      projectiles.add(new projectile(xCor, yCor, speed, -1 * speed, atck));
+      projectiles.add(new projectile(xCor, yCor, speed, speed, atck));
+      projectiles.add(new projectile(xCor, yCor, -1 * speed, atck));
 
       //remove projectiles that are dead
       int i = 0;
