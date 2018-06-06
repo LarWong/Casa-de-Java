@@ -46,3 +46,5 @@ Run the program and click your mouse to begin.
 ## Features
 
 ## Bugs
+
+- Player's weapon objects can overlap.
