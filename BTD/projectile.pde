@@ -23,9 +23,9 @@ class projectile {
     yVel = -10 * newYSpeed;
     atck = newAtck;
   }
-  
+
   //constructor used for projectiles that don't only move up and down
-  projectile(float mX, float mY, float newXSpeed,float newYSpeed, int newAtck) {
+  projectile(float mX, float mY, float newXSpeed, float newYSpeed, int newAtck) {
     xCor = mX;
     yCor = mY;
     //////////////////////////////////////////////////////////
