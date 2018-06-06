@@ -41,8 +41,9 @@ map map = new map();
 ArrayList<enemy> enemies; //here lies all enemies
 
 //instance vars for buying system
-int TOWER = 1;
-int FREEZER = 2;
+final int TOWER = 1;
+final int FREEZER = 2;
+final int TACKSHOOTER = 3;
 
 //default state is TOWER
 int state = TOWER;
@@ -142,6 +143,8 @@ void draw() {
     rect(1025, 5, 150, 70); //panel for buying
     fill(0, 256, 0);
     rect(1025, 100, 150, 70);
+    fill(0,0,256);
+    rect(1025,195,150,70);
 
     //temp path
     fill(0, 0, 256);
@@ -175,6 +178,7 @@ void draw() {
     text("Money:" + localPlayer.getMoney(), 850, 60);
     text("Buy Tower", 1075, 50);
     text("Buy Freezer", 1075, 150);
+    text("Buy Tack Shooter", 1075, 250);
     //println("Health: " + localPlayer.getHealth() + " Money: " + localPlayer.getMoney()); //prints to console
   }
 }
@@ -195,6 +199,10 @@ void mouseClicked() {
       } else if (mouseX > 1025 && mouseY > 100 && mouseY < 170) {
         state = FREEZER;
         println("Click a part of the map to buy a FREEZER");
+      }
+      else if(mouseX > 1025 && mouseY > 195 && mouseY < 265){
+       state = TACKSHOOTER;
+       println("Click a part of the map to buy a TACK SHOOTER");
       }
     }
     //creates a new tower upon click if player has enough money

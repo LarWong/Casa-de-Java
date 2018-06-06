@@ -11,7 +11,7 @@ class projectile {
   private float size = 10;
   private int atck;
 
-  projectile(float mX, float mY, float newSpeed, int newAtck) {
+  projectile(float mX, float mY, float newYSpeed, int newAtck) {
     xCor = mX;
     yCor = mY;
     //////////////////////////////////////////////////////////
@@ -20,9 +20,24 @@ class projectile {
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
     xVel = 0;
-    yVel = -10 * newSpeed;
+    yVel = -10 * newYSpeed;
     atck = newAtck;
   }
+  
+  //constructor used for projectiles that don't only move up and down
+  projectile(float mX, float mY, float newXSpeed,float newYSpeed, int newAtck) {
+    xCor = mX;
+    yCor = mY;
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    //////////////////////////////////////////////////////////
+    xVel = -10 * newXSpeed;
+    yVel = -10 * newYSpeed;
+    atck = newAtck;
+  }
+
 
   int getState() {
     return state;
