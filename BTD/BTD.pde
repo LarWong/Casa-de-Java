@@ -59,8 +59,8 @@ void setup() {
    different canvas size and renderer options
    must be first thing in setup
    ******************************************/
-  //size(1200, 500);
-  size(1200, 500, P2D); //faster than default renderer for most tasks, but sacrifices some visual quality for speed
+  //size(1000, 500);
+  size(1000, 500, P2D); //faster than default renderer for most tasks, but sacrifices some visual quality for speed
 
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
@@ -134,7 +134,7 @@ void draw() {
 
       fill(gold);
       textFont(font72); //sets the current font that will be drawn with text()
-      text("Bloon Tower Defense", 320, 255);
+      text("Bloon Tower Defense", 120, 255);
       if (time - titleStartTime > TITLE_TIME) { //has it been on screen for 2s?
         beginning = displayTitle = false; //stop displaying title
       }
@@ -144,11 +144,11 @@ void draw() {
 
     //side panel for UI
     fill(150);
-    rect(1001, 0, 1200, 500);
-    shape(tower, 1051, 100);
-    shape(freezer, 1150, 100);
+    rect(801, 0, 1000, 500);
+    shape(tower, 851, 100);
+    shape(freezer, 950, 100);
     fill(0, 0, 255);
-    rect(1025, 195, 150, 70);
+    rect(825, 195, 150, 70);
 
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
@@ -182,11 +182,11 @@ void draw() {
     if (millis() - time >= 10) { //updates every 10ms
       time = millis();
       fill(255);
-      text("Health:" + localPlayer.getHealth(), 1040, 30);
-      text("Money:" + localPlayer.getMoney(), 1040, 60);
-      //text("buy tower", 1075, 50);
-      //text("buy freezer", 1075, 150);
-      //text("buy tack shooter", 1075, 250);
+      text("Health:" + localPlayer.getHealth(), 840, 30);
+      text("Money:" + localPlayer.getMoney(), 840, 60);
+      //text("buy tower", 875, 50);
+      //text("buy freezer", 875, 150);
+      //text("buy tack shooter", 875, 250);
       //println("Health: " + localPlayer.getHealth() + " Money: " + localPlayer.getMoney()); //prints to console
     }
   }
@@ -202,11 +202,11 @@ void mouseClicked() {
     titleDisplayed += 1; //this prevents title from being displayed more than once
   } else {
 
-    if (mouseX > 1000) {
-      if (mouseX >= 1032 && mouseX <= 1072 && mouseY >= 80 && mouseY <= 120) {
+    if (mouseX > 800) {
+      if (mouseX >= 832 && mouseX <= 872 && mouseY >= 80 && mouseY <= 120) {
         weaponState = TOWER;
         println("place your tower");
-      } else if (mouseX >= 1130 && mouseX <= 1170 && mouseY >= 80 && mouseY <= 120) {
+      } else if (mouseX >= 930 && mouseX <= 970 && mouseY >= 80 && mouseY <= 120) {
         weaponState = FREEZER;
         println("place your freezer");
       }//////////////////////////////////////////////////////////
@@ -214,7 +214,7 @@ void mouseClicked() {
       //////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////
       //////////////////////////////////////////////////////////
-      else if (mouseX > 1025 && mouseY > 195 && mouseY < 265) {
+      else if (mouseX > 825 && mouseY > 195 && mouseY < 265) {
         weaponState = TACKSHOOTER;
         println("place your tack shooter");
       }
