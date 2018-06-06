@@ -11,7 +11,7 @@ PFont font24, font72;
  shapes used in program
  before a shape is used, must be loaded with loadShape() or created with createShape()
  *************************************************************************************/
-PShape tower, freezer, freezerInner, freezerOuter;
+PShape tower, freezer, freezerInner, freezerOuter, tackshooter, tackshooterCircle, tackshooterLeft, tackshooterRight, tackshooterUp, tackshooterDown;
 
 //*************colors**************
 color crimson = color(220, 20, 60);
@@ -24,15 +24,21 @@ color silver = color(192);
 //*********************************
 
 int time = 0; //stores milliseconds since start of run
+boolean paused = true; //determines whether gameplay takes place
 
 
+
+boolean beginning = true; //whether program is in the beginning
 
 //title display vars
 boolean displayTitle; //whether to display title, defaults to false
 int titleDisplayed; //whether title has been displayed -- 0 is false, any other # is true
 int titleStartTime; //time when title appeared
 final int TITLE_TIME = 2000; //how long to display title, 2s
-boolean beginning = true; //whether program is in the beginning
+
+//instructions display vars
+boolean displayInstructions = true; //whether to display instrutions, defaults to true
+int instructionsDisplayed; //whether instructions has been displayed -- 0 is false, any other # is true
 
 
 
@@ -111,15 +117,34 @@ void setup() {
   freezer.addChild(freezerOuter);
   freezer.addChild(freezerInner);
 
+  /*******************
+   creates tackshooter
+   *******************/
+  tackshooter = createShape(GROUP);
+  tackshooterLeft = createShape(RECT, -20, -5, 10, 10);
+  tackshooterLeft.setFill(rose);
+  tackshooterRight = createShape(RECT, 10, -5, 10, 10);
+  tackshooterRight.setFill(rose);
+  tackshooterUp = createShape(RECT, -5, -20, 10, 10);
+  tackshooterUp.setFill(rose);
+  tackshooterDown = createShape(RECT, -5, 10, 10, 10);
+  tackshooterDown.setFill(rose);
+  tackshooterCircle = createShape(ELLIPSE, 0, 0, 30, 30);
+  tackshooterCircle.setFill(rose);
+  tackshooter.addChild(tackshooterLeft);
+  tackshooter.addChild(tackshooterRight);
+  tackshooter.addChild(tackshooterUp);
+  tackshooter.addChild(tackshooterDown);
+  tackshooter.addChild(tackshooterCircle);
 
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
-  //creates 10 enemies
+  //creates 20 enemies
   enemies = new ArrayList<enemy>();
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < 20; i++) {
     enemies.add(new bloon(50 * (i + 1), 50));
   }
 }
@@ -130,14 +155,20 @@ void draw() {
 
   if (beginning) {
 
-    if (displayTitle) { //shall I display title?
+    if (displayInstructions) { //shall I display instructions?
+
+      fill(silver);
+      textFont(font24); //sets the current font that will be drawn with text()
+      text("How to play", 10, 30);
+      text("This is a game", 10, 60);
+      if (keyPressed) displayInstructions = false; //stop displaying instructions
+    } else if (displayInstructions == false) { //shall I display title?
 
       fill(gold);
-      textFont(font72); //sets the current font that will be drawn with text()
+      textFont(font72);
       text("Bloon Tower Defense", 220, 255);
-      if (time - titleStartTime > TITLE_TIME) { //has it been on screen for 2s?
-        beginning = displayTitle = false; //stop displaying title
-      }
+      //has it been on screen for 2s?
+      if (time - titleStartTime > TITLE_TIME) beginning = displayTitle = false; //stop displaying title
       time = millis();
     }
   } else {
@@ -147,8 +178,7 @@ void draw() {
     rect(801, 0, 1000, 500);
     shape(tower, 851, 100);
     shape(freezer, 950, 100);
-    fill(0, 0, 255);
-    rect(825, 195, 150, 70);
+    shape(tackshooter, 851, 150);
 
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
@@ -156,7 +186,7 @@ void draw() {
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
     //temp path
-    fill(0, 0, 256);
+    fill(0, 0, 255);
     rect(50, 25, 700, 50);
     rect(50, 115, 700, 50);
     rect(50, 205, 700, 50);
@@ -164,17 +194,19 @@ void draw() {
     rect(50, 385, 700, 50);
 
 
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //enemies move
-    for (enemy enemy : enemies)
-      enemy.move();
+    //if (paused) {
+      //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      //enemies move
+      for (enemy enemy : enemies)
+        enemy.move();
 
 
-    localPlayer.play();
+      localPlayer.play();
+    //}
 
 
     //health status
@@ -198,8 +230,7 @@ void mouseClicked() {
   //for title displaying
   if (displayTitle == false && titleDisplayed == 0) {
     displayTitle = true;
-    titleStartTime = millis();
-    titleDisplayed += 1; //this prevents title from being displayed more than once
+    titleDisplayed++; //this prevents title from being displayed more than once
   } else {
 
     if (mouseX > 800) {
@@ -245,6 +276,16 @@ void mouseClicked() {
 
     //creates a new bloon upon click
     //enemies.add(new bloon(mouseX, mouseY));
+
+
+    paused = false;
+  }
+}
+
+void keyPressed() {
+  if (instructionsDisplayed == 0) {
+    titleStartTime = millis(); //start time for displaying title
+    instructionsDisplayed++; //this prevents instructions from being displayed more than once
   }
 }
 
