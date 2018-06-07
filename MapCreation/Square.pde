@@ -8,7 +8,6 @@ class Square {
   final static int BORDER = 4;
   final static int CONFIRM = 5;
   final static int CLEAR = 6;
-  final static int VISITED = 7;
   //===============================================
 
   //vars 
@@ -60,8 +59,7 @@ class Square {
     if (this.state == START) c = color(0, 0, 255); //blue
     if (this.state == BORDER) c = color(100, 100, 100); //grey
     if (this.state == CONFIRM) c = color(0, 130, 130); //cyan
-    if (this.state == CLEAR) c = color(130, 130, 0); //yellowish-green
-    if (this.state == VISITED) c = color(0, 0, 100);
+    if (this.state == CLEAR) c = color(130, 130, 0); //yellowish-brown
   }
 
   void appear(int row, int col) {
@@ -97,10 +95,6 @@ class Square {
     case 6: 
       this.state = CLEAR;
       break;
-    case 7: 
-      this.state = VISITED;
-      break;
     }
   }
-  
 }
