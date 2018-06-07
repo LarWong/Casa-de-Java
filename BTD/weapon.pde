@@ -114,7 +114,7 @@ abstract class weapon {
 
     for (projectile projectile : projectiles) projectile.move(); //projectiles move
 
-    if (time - lastFiredTime > 1200.0 / speed) { //weapon has certain cooldown
+    if (time - lastFiredTime > 12000.0 / speed) { //weapon has certain cooldown
       lastFiredTime = millis();
       projectiles.add(new projectile(xCor, yCor - 10, speed, atck)); //create a new projectile
 

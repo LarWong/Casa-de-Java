@@ -98,7 +98,7 @@ class projectile {
             //////////////////////////////////////////////////////////
             //////////////////////////////////////////////////////////NOT ALWAYS
             enemy.pop(); //enemy is dead
-            localPlayer.setMoney(localPlayer.getMoney() + 10); //player gets money
+            localPlayer.setMoney(localPlayer.getMoney() + 1); //player gets money
           }
         }
       }
