@@ -12,6 +12,8 @@ abstract class enemy {
   protected float xVel, yVel;
   protected float origXVel;
   protected float size;
+  protected int prevDirection;
+  //0 = up, 1 = down, 2 = left, 3= right
 
   int getState() {
     return state;
@@ -101,8 +103,21 @@ abstract class enemy {
   void move() {
 
     if (state != DEAD) {
-      xCor += xVel;
-      yCor += yVel;
+      //0 = up, 1 = down, 2 = left, 3= right
+      if (checkPath(floor(origXVel), 0) && prevDirection != 2) {
+        xCor += origXVel;
+        prevDirection = 3;
+      } else if (checkPath(floor(-origXVel), 0) && prevDirection != 3) {
+        xCor += -origXVel;
+        prevDirection = 2;
+      } else if (checkPath(0, floor(origXVel)) && prevDirection != 0) {
+        yCor += origXVel;
+        prevDirection = 1;
+      } else if (checkPath(0, floor(-origXVel)) && prevDirection != 1) {
+        yCor += -origXVel;
+        prevDirection = 0;
+      }
+
       fill(c);
       ellipse(xCor, yCor, 30, 40); //UPDATE THIS LATER TO INCLUDE OTHER SHAPES
       if (xCor < size || xCor > 800 - size) {
@@ -112,12 +127,29 @@ abstract class enemy {
       }
       if (yCor > 500 - size) {
         pop();
-        localPlayer.setHealth(localPlayer.getHealth() - 1);
+        print("hi");
       }
     }
   }
 
   void pop() {
     state = DEAD;
+  }
+
+  boolean checkPath(int xAdd, int yAdd) {
+    //get the coords of pixle to check
+    int checkX = floor(xCor + xAdd);
+    int checkY = floor(yCor + yAdd);
+    //get the color of pixel
+    color nextTile = get(floor(checkX+size), floor(checkY+size));
+    //get the path color
+    float greenAspect = green(nextTile);
+
+    //check if path color matches shortest path
+    if (greenAspect == 100) {
+      return true;
+    } else {
+      return false;
+    }
   }
 }

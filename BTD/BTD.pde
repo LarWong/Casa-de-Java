@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /***********************************************************************
- fonts for size 36 & 72, respectively
+ fonts for size 36 & 72, respectively //<>//
  PFont is font clsass for Processing
  fonts must be located in sketch's "data" directory to load successfully
  ***********************************************************************/
