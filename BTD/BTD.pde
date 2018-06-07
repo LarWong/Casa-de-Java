@@ -160,7 +160,11 @@ void draw() {
       fill(silver);
       textFont(font24); //sets the current font that will be drawn with text()
       text("How to play", 10, 30);
-      text("This is a game", 10, 60);
+      text("You have a task, survive against the enemy balloons as much as you can.", 10, 60);
+      text("Using your alloted money, purchase towers. Every balloon you pop, the more money you get.", 10, 80);
+      text("Interact with the icons to learn more or purchase",10,100);
+      
+      text("Please Press a Key to Start", 10, 150);
       if (keyPressed) displayInstructions = false; //stop displaying instructions
     } else if (displayInstructions == false) { //shall I display title?
 
