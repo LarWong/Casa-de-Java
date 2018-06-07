@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class BreathFirstSearchSolver {
+public class PathFinder {
 
   final private int MAX_SIZE = 1000; //limit on maze size
   private char[][] maze;
@@ -18,7 +18,7 @@ public class BreathFirstSearchSolver {
 
 
 
-  public BreathFirstSearchSolver(String mazeInput) {
+  public PathFinder(String mazeInput) {
     // init 2D array to represent maze
     //maze = mazeInput;
     queue = new LinkedList<Node>();
@@ -26,7 +26,7 @@ public class BreathFirstSearchSolver {
     try {
 
 
-      String[] lines = loadStrings("map.txt");
+      String[] lines = loadStrings(mazeInput);
       heightM = lines.length;
       widthM = lines[0].length();
       maze = new char[heightM][widthM];

@@ -7,7 +7,7 @@
  * - Otherwise, if there are no * around, backtrack to the last spot with multiple options to move, similar to the knight's tour.
  * - Keep moving until the final position is reached, denoted with a "&"
  ***/
-class DepthFirstChecker {
+class MazeChecker {
   final private int MAX_SIZE = 1000; //limit on maze size
   private char[][] maze;
   private boolean solved;
@@ -22,7 +22,7 @@ class DepthFirstChecker {
 
 
 
-  public DepthFirstChecker(String map) {
+  public MazeChecker(String map) {
     try {
       String[] lines = loadStrings(map);
       maze = new char[lines.length][lines[0].length()];

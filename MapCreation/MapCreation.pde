@@ -7,7 +7,7 @@ Queue<String> queue;
 
 void setup() {
   size(1200, 500);
-  world = new CreateMap(500, 1200, 25);
+  world = new CreateMap(100, 400, 25);
   Node test = new Node(1,2,null);
 
 }

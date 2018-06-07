@@ -30,6 +30,7 @@ boolean paused = true; //determines whether battle takes place defaults to false
 
 
 boolean beginning = true; //whether program is in the beginning, defaults to true
+boolean creationDone = false; //determine if user is in map creation stage
 
 //title display vars
 boolean displayTitle = true; //whether to display title, defaults to true
@@ -62,7 +63,12 @@ int spawnType = BLOON;
 
 //game objects
 player localPlayer = new player();
-map map = new map();
+CreateMap world = new CreateMap(500, 800, 50);
+
+//background tiles
+Square[][] bacgroundPixels;
+
+//enemies 
 ArrayList<enemy> enemies = new ArrayList<enemy>(); //here lies all enemies
 int numEnemies = 20 * localPlayer.getLevel(); //# of enemies based on user level
 int enemyAppeared; //time since last enemy appeared
@@ -193,24 +199,30 @@ void draw() {
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
     //path
-    fill(0, 0, 255);
-    rect(0, 25, 800, 50);
-    rect(0, 115, 800, 50);
-    rect(0, 205, 800, 50);
-    rect(0, 295, 800, 50);
-    rect(0, 385, 800, 50);
-
-
+    //Map creation process
+    if (!creationDone) {
+      //print out instructions
+      fill(255,255,255); //white
+      textFont(font24); // font type
+      text("Yellow to Clear", 825, 200);
+      text("Cyan to Submit", 825, 250);
+      //creating map 
+      creationDone = world.creationProcess();
+    } 
     //if (!paused) {
-    createEnemies();
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //enemies move
-    for (enemy enemy : enemies)
-      enemy.move();
+    if (creationDone) {
+      //print the map with shortest path in green
+      world.printMap();
+      createEnemies();
+      //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      //////////////////////////////////////////////////////////
+      //enemies move
+      for (enemy enemy : enemies)
+        enemy.move();
+    }
 
 
     localPlayer.play();
@@ -234,7 +246,9 @@ void draw() {
 
 void mouseClicked() {
 
-  if (!beginning) {
+  if (!creationDone) {
+    world.mapClick(mouseX, mouseY);
+  } else if (!beginning && creationDone) {
 
     if (mouseX > 800) {
       if (mouseX >= 832 && mouseX <= 872 && mouseY >= 80 && mouseY <= 120) {
@@ -284,9 +298,9 @@ void createEnemies() {
 
       int rand = (int) random(20, 23); //random int between 20-21
 
-      if (rand == 20) enemies.add(new bloon(50, 50, crimson)); //crimson bloon
-      else if (rand == 21) enemies.add(new bloon(50, 50, sapphire)); //sapphire bloon
-      else if (rand == 22) enemies.add(new woodenbloon(50, 50)); //wooden bloon
+      if (rand == 20) enemies.add(new bloon(75, 75, crimson)); //crimson bloon
+      else if (rand == 21) enemies.add(new bloon(75, 75, sapphire)); //sapphire bloon
+      else if (rand == 22) enemies.add(new woodenbloon(75, 75)); //wooden bloon
       enemyAppeared = millis();
       numEnemies--;
     }

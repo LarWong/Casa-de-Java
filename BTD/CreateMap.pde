@@ -20,7 +20,7 @@ class CreateMap {
     }
   }
 
-  void creationProcess() {
+  boolean creationProcess() {
     if (!creationDone) { 
       for (int i=0; i<rows; i++) {
         for (int j=0; j<cols; j++) {
@@ -29,7 +29,9 @@ class CreateMap {
       }
     } else {
       printMap();
+      return creationDone;
     }
+    return creationDone;
   }
 
   void saveMap() {
