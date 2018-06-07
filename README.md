@@ -26,3 +26,6 @@ Enemies start spawning on the upper left cornor of the screen and mave their way
 2. In order to run the game, you must have Processing installed. It is recommended that you have Processing 3. You may find the download files [here](https://processing.org/download/).
 3. Once everything is installed, run Processing and open `BTD.pde`. The game will immediately begin from there.
 
+## Bugs
+1. Player's weapon objects can overlap.
+2. If two freezers are two clsoe together, the second freezer's effect does not register.
