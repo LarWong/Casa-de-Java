@@ -104,13 +104,20 @@ Alvin Ye ::
 2018-06-05
 ____________________________________________________________________________________________________
 Kevin Wang :: Brought together title displaying with gameplay. Created shapes for different weapons.
-Larry Wong ::
+Larry Wong :: Shortest path algorithm completed (with some errors)
 Alvin Ye ::
 ====================================================================================================
 
 2018-06-06
 ____________________________________________________________________
 Kevin Wang :: Created tack shooter shape. Made tack shooter less OP.
-Larry Wong ::
+Larry Wong :: Shortest path errors fixed
+ALvin Ye ::
+====================================================================
+
+2018-06-07
+____________________________________________________________________
+Kevin Wang :: Created tack shooter shape. Made tack shooter less OP.
+Larry Wong :: Implemented map and shortest path into main driver
 ALvin Ye ::
 ====================================================================
