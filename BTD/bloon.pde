@@ -34,4 +34,9 @@ class bloon extends enemy {
     yCor = mY;
     c = newColor;
   }
+
+  void pop() {
+    if (c == sapphire) c = crimson;
+    else if (c == crimson) state = DEAD;
+  }
 }

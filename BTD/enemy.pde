@@ -62,9 +62,9 @@ abstract class enemy {
   float getXVel() {
     return xVel;
   }
-  
-  float getOrigXVel(){
-     return origXVel; 
+
+  float getOrigXVel() {
+    return origXVel;
   }
 
   float setXVel(float newXVel) {
@@ -99,7 +99,7 @@ abstract class enemy {
   //////////////////////////////////////////////////////////
   //////////////////////////////////////////////////////////
   void move() {
-    
+
     if (state != DEAD) {
       xCor += xVel;
       yCor += yVel;
