@@ -9,63 +9,45 @@
  ***/
 class DepthFirstChecker {
   final private int MAX_SIZE = 1000; //limit on maze size
-  private Square[][] maze;
-  private int height, width; //height, width of maze
+  private char[][] maze;
   private boolean solved;
 
 
   //initialize constants for map component symbols
-  final private int WALL =         0;
-  final private int PATH =         1;
-  final private int THE_EXIT =     2;
-  final private int THE_START =    3;
-  final private int VISITED_PATH = 7;
+  final private int WALL =         '#';
+  final private int PATH =         '*';
+  final private int THE_EXIT =     '&';
+  final private int CURRENT =      '@';
+  final private int VISITED_PATH = '.';
 
 
 
-  public DepthFirstChecker(Square[][] mazeInput) {
-    // init 2D array to represent maze
-    maze = mazeInput;
+  public DepthFirstChecker(String map) {
+    try {
+      String[] lines = loadStrings(map);
+      maze = new char[lines.length][lines[0].length()];
 
-    /*
-    height = 0;
-     width = 0;
-     
-     
-     try {
-     String[] lines = loadStrings("map.txt");
-     
-     for(int textRow = 0; textRow < lines.length; textRow++){
-     
-     String line = lines[textRow];;
-     width = line.length();
-     
-     for ( int i=0; i<line.length(); i++ ) {
-     maze[i][textRow] = line.charAt( i );
-     }
-     
-     height++;
-     
-     }
-     }
-     catch(Exception e) {
-     System.out.println("does not exist");
-     }
-     */
+      for (int r = 0; r < lines.length; r++) {
+        for (int c = 0; c < lines[0].length(); c++) {
+          maze[r][c] = lines[r].charAt(c);
+        }
+      }
 
-
-    //at init time, maze has not been solved:
-    solved = false;
+      solved = false;
+    } 
+    catch(Exception e) {
+      System.out.println( "Error reading file" );
+    }
   }//end constructor
 
   void solve( int currX, int currY ) {
     //primary base case
-    if ( maze[currX][currY].getState() == THE_EXIT ) {
+    if ( maze[currX][currY] == THE_EXIT ) {
       solved = true;
     }
     //other base cases
-    else if ( maze[currX][currY].getState() == PATH) {
-      maze[currX][currY].setState(THE_START);
+    else if ( maze[currX][currY] == PATH) {
+      maze[currX][currY] = CURRENT;
 
       if ( !solved )
         solve( currX, currY-1 );
@@ -76,15 +58,13 @@ class DepthFirstChecker {
       if ( !solved )
         solve( currX-1, currY );
 
-      maze[currX][currY].setState(VISITED_PATH);
+      maze[currX][currY] = VISITED_PATH;
     }
     return;
   }
 
   public boolean checkMaze() {
-    maze[1][1].setState(PATH);
     this.solve(1, 1);
-    maze[1][1].setState(THE_START);
     return solved;
   }
 }//end of class DepthFirstChecker

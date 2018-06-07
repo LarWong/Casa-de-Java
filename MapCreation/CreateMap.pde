@@ -53,6 +53,7 @@ class CreateMap {
     map.close();
   }
 
+
   void printMap() {
     try {
       String[] lines = loadStrings("map.txt");
@@ -75,6 +76,9 @@ class CreateMap {
             break;
           case '@': 
             c = color(0, 0, 255);
+            break;
+          case '!': 
+            c = color(0, 0, 100);
             break;
           }
           for (int xPixel = x; xPixel < x + boxsize; xPixel++) {
@@ -102,9 +106,13 @@ class CreateMap {
 
       if (xM > (cols-1)*(boxsize) && xM < (cols)*(boxsize) && yM > (rows-1)*(boxsize) && yM < (rows)*(boxsize)) {
         saveMap();
-        DepthFirstChecker check = new DepthFirstChecker(grid);
-        if (check.checkMaze()) {
+        DepthFirstChecker check = new DepthFirstChecker("map.txt");
+        boolean working = check.checkMaze();
+        if (working) {
           creationDone = true;
+          BreathFirstSearchSolver path = new BreathFirstSearchSolver("map.txt");
+          //print(path);
+          path.solve("map.txt");
           println("good MAP");
         } else {
           println("Invaild MAP");
