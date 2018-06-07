@@ -17,7 +17,7 @@ class tower extends weapon {
     HP = 100;
     size = 40;
     atck = 10;
-    speed = 10;
+    speed = 5;
     price = 30;
   }
 

@@ -2,6 +2,7 @@ class projectile {
 
   private final static int ALIVE = 0;
   private final static int DEAD = 1;
+  private final static int INJURED = 2;
 
   //instance vars
   private int state = ALIVE;
@@ -91,13 +92,20 @@ class projectile {
           //checks if dist is close enough
           if (distance <= 0.15 * pow(this.size + enemy.size, 2)) {
             this.state = DEAD; //projectile is gone
-            //enemy.setHP(enemy.getHP() - atck);
-            //////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////NOT ALWAYS
-            enemy.pop(); //enemy is dead
+
+            if (enemy instanceof bloon) { 
+              enemy.pop(); //enemy is dead
+            }
+
+            if (enemy instanceof woodenbloon) {
+              if (enemy.getState() == INJURED) { 
+                enemy.pop();
+              } else { //otherwise, the enemy is ALIVE
+                enemy.setState(INJURED);
+                enemy.setColor(crimson);
+              }
+            }
+
             localPlayer.setMoney(localPlayer.getMoney() + 1); //player gets money
           }
         }

@@ -55,6 +55,12 @@ final int TACKSHOOTER = 3;
 //default weapon state
 int weaponState = TOWER;
 
+//vars for spawining bloons
+final int BLOON = 20;
+final int WOODENBLOON = 21;
+
+int spawnState = BLOON;
+
 
 
 //==================================================================================
@@ -145,7 +151,16 @@ void setup() {
   //creates 20 enemies
   enemies = new ArrayList<enemy>();
   for (int i = 0; i < 20; i++) {
+    int rand = int( random(20,22) ); //random number between 20-21
+    if(rand == 20){       //Random number between 20-21
     enemies.add(new bloon(50 * (i + 1), 50));
+    }
+    else{
+     if(rand == 21){
+      enemies.add(new woodenbloon(50 * (i + 1),50)); 
+     }
+    }
+    
   }
 }
 
