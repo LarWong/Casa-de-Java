@@ -35,7 +35,7 @@ boolean beginning = true; //whether program is in the beginning, defaults to tru
 boolean displayTitle = true; //whether to display title, defaults to true
 int titleAppeared; //whether title has appeared or not -- 0 is false, any other # is true 
 int titleStartTime; //time when title appeared
-final int TITLE_TIME = 4000; //how long to display title, 4s
+final int TITLE_TIME = 5000; //how long to display title, 5s
 
 //instructions display vars
 boolean displayInstructions; //whether to display instrutions, defaults to false
@@ -63,7 +63,9 @@ int spawnType = BLOON;
 //game objects
 player localPlayer = new player();
 map map = new map();
-ArrayList<enemy> enemies; //here lies all enemies
+ArrayList<enemy> enemies = new ArrayList<enemy>(); //here lies all enemies
+int numEnemies = 20 * localPlayer.getLevel(); //# of enemies based on user level
+int enemyAppeared; //time since last enemy appeared
 
 
 
@@ -138,19 +140,6 @@ void setup() {
   tackshooter.addChild(tackshooterUp);
   tackshooter.addChild(tackshooterDown);
   tackshooter.addChild(tackshooterCircle);
-
-  //creates # of enemies based on user's level
-  enemies = new ArrayList<enemy>();
-  for (int i = 0; i < 20 * localPlayer.getLevel(); i++) {
-
-    int rand = (int) random(20, 22); //random int between 20-21
-
-    if (rand == 20) { //bloon
-      enemies.add(new bloon(50 * (i + 1), 50, crimson));
-    } else if (rand == 21) { //wooden bloon
-      enemies.add(new woodenbloon(50 * (i + 1), 50));
-    }
-  }
 }
 
 void draw() {
@@ -171,7 +160,7 @@ void draw() {
       text("Bloon Tower Defense", 220, 180);
       textFont(font24);
       text("Created by Kevin Wang, Larry Wong, Alvin Ye", 260, 300);
-      //has it been on screen for 4s?
+      //has it been on screen for 5s?
       if (time - titleStartTime > TITLE_TIME) displayTitle = false; //stop displaying title
       time = millis();
     } else if (displayTitle == false) { //shall I display instructions?
@@ -185,8 +174,8 @@ void draw() {
       text("Interact with the icons on the side panel that will appear to purchase, get more info, & upgrade.", 10, 150);
       text("Look at the console for any messages that will appear during the game.", 10, 180);
       text("Good luck!", 10, 210);
-      
-      text("Press a key to start", 10, 270);
+
+      text("Press any key to start", 10, 270);
       if (keyPressed) beginning = displayInstructions = false; //stop displaying instructions, end beginning
     }
   } else {
@@ -203,7 +192,7 @@ void draw() {
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
-    //temp path
+    //path
     fill(0, 0, 255);
     rect(0, 25, 800, 50);
     rect(0, 115, 800, 50);
@@ -212,7 +201,8 @@ void draw() {
     rect(0, 385, 800, 50);
 
 
-    //if (paused) {
+    //if (!paused) {
+    createEnemies();
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
@@ -240,7 +230,6 @@ void draw() {
       //println("Health: " + localPlayer.getHealth() + " Money: " + localPlayer.getMoney()); //prints to console
     }
   }
-  //println(mouseX + " " + mouseY); //location of mouse
 }
 
 void mouseClicked() {
@@ -263,7 +252,7 @@ void mouseClicked() {
     //creates a new weapon upon click if player has enough money
     //if (localPlayer.getMoney() >= 30) {
     else { 
-      //temp variables for the path Y-coordinates
+      //temp variables for the path y-coordinates
       int a = 25;
       int b = 115;
       int c = 205;
@@ -275,25 +264,31 @@ void mouseClicked() {
         (mouseY > b && mouseY < b + 50) ||
         (mouseY > c && mouseY < c + 50) ||
         (mouseY > d && mouseY < d + 50) || 
-        (mouseY > e && mouseY < e + 50)) {
+        (mouseY > e && mouseY < e + 50))
         println("INVALID PLACEMENT");
-      } else {
-        localPlayer.buy(mouseX, mouseY, weaponState);
-      }
+      else localPlayer.buy(mouseX, mouseY, weaponState);
     }
-
-
-    //creates a new bloon upon click
-    //enemies.add(new bloon(mouseX, mouseY));
-
-
-    paused = false;
   }
 }
 
 void keyPressed() {
   if (instructionsAppeared == 0) {
     instructionsAppeared++; //this prevents instructions from being displayed more than once
+  }
+}
+
+void createEnemies() {
+
+  if (numEnemies != 0) {
+    if (millis() - enemyAppeared >= 800) {
+
+      int rand = (int) random(20, 22); //random int between 20-21
+
+      if (rand == 20) enemies.add(new bloon(50, 50, crimson)); //bloon
+      else if (rand == 21) enemies.add(new woodenbloon(50, 50)); //wooden bloon
+      enemyAppeared = millis();
+      numEnemies--;
+    }
   }
 }
 
