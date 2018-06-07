@@ -120,14 +120,15 @@ abstract class enemy {
 
       fill(c);
       ellipse(xCor, yCor, 30, 40); //UPDATE THIS LATER TO INCLUDE OTHER SHAPES
+      /*
       if (xCor < size || xCor > 800 - size) {
         xVel *= -1;
         origXVel *= -1;
         yCor += 90;
       }
-      if (yCor > 500 - size) {
+      */
+      if (yCor < 450 && yCor > 400 && xCor < 750 && xCor > 700) {
         pop();
-        print("hi");
       }
     }
   }
