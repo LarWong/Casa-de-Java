@@ -16,6 +16,7 @@ PShape tower, freezer, freezerInner, freezerOuter, tackshooter, tackshooterCircl
 //*************colors**************
 color crimson = color(220, 20, 60);
 color sapphire = color(8, 37, 103);
+color wood = color(222, 184, 135);
 color moss = color(173, 223, 173);
 color rose = color(255, 85, 163);
 color ice = color(212, 240, 255);
@@ -24,28 +25,23 @@ color silver = color(192);
 //*********************************
 
 int time = 0; //stores milliseconds since start of run
-boolean paused = true; //determines whether gameplay takes place
+boolean paused = true; //determines whether battle takes place defaults to false
 
 
 
-boolean beginning = true; //whether program is in the beginning
+boolean beginning = true; //whether program is in the beginning, defaults to true
 
 //title display vars
-boolean displayTitle; //whether to display title, defaults to false
-int titleDisplayed; //whether title has been displayed -- 0 is false, any other # is true
+boolean displayTitle = true; //whether to display title, defaults to true
+int titleAppeared; //whether title has appeared or not -- 0 is false, any other # is true 
 int titleStartTime; //time when title appeared
-final int TITLE_TIME = 2000; //how long to display title, 2s
+final int TITLE_TIME = 4000; //how long to display title, 4s
 
 //instructions display vars
-boolean displayInstructions = true; //whether to display instrutions, defaults to true
-int instructionsDisplayed; //whether instructions has been displayed -- 0 is false, any other # is true
+boolean displayInstructions; //whether to display instrutions, defaults to false
+int instructionsAppeared; //whether instructions has been displayed -- 0 is false, any other # is true
 
 
-
-//game objects
-player localPlayer = new player();
-map map = new map();
-ArrayList<enemy> enemies; //here lies all enemies
 
 //vars for buying system
 final int TOWER = 1;
@@ -55,15 +51,21 @@ final int TACKSHOOTER = 3;
 //default weapon state
 int weaponState = TOWER;
 
-//vars for spawining bloons
+//vars for spawning bloons
 final int BLOON = 20;
 final int WOODENBLOON = 21;
 
-int spawnState = BLOON;
+//default spawn type
+int spawnType = BLOON;
 
 
 
-//==================================================================================
+//game objects
+player localPlayer = new player();
+map map = new map();
+ArrayList<enemy> enemies; //here lies all enemies
+
+
 
 void setup() {
 
@@ -73,12 +75,6 @@ void setup() {
    ******************************************/
   //size(1000, 500);
   size(1000, 500, P2D); //faster than default renderer for most tasks, but sacrifices some visual quality for speed
-
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
   background(15); //not pure black
   //noStroke(); //disables outlines
   //frameRate(240); //for developer testing
@@ -143,24 +139,17 @@ void setup() {
   tackshooter.addChild(tackshooterDown);
   tackshooter.addChild(tackshooterCircle);
 
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //////////////////////////////////////////////////////////
-  //creates 20 enemies
+  //creates # of enemies based on user's level
   enemies = new ArrayList<enemy>();
-  for (int i = 0; i < 20; i++) {
-    int rand = int( random(20,22) ); //random number between 20-21
-    if(rand == 20){       //Random number between 20-21
-    enemies.add(new bloon(50 * (i + 1), 50));
+  for (int i = 0; i < 20 * localPlayer.getLevel(); i++) {
+
+    int rand = (int) random(20, 22); //random int between 20-21
+
+    if (rand == 20) { //bloon
+      enemies.add(new bloon(50 * (i + 1), 50, crimson));
+    } else if (rand == 21) { //wooden bloon
+      enemies.add(new woodenbloon(50 * (i + 1), 50));
     }
-    else{
-     if(rand == 21){
-      enemies.add(new woodenbloon(50 * (i + 1),50)); 
-     }
-    }
-    
   }
 }
 
@@ -170,25 +159,35 @@ void draw() {
 
   if (beginning) {
 
-    if (displayInstructions) { //shall I display instructions?
+    if (titleAppeared == 0) {
+      titleStartTime = millis();
+      titleAppeared++;
+    }
 
-      fill(silver);
-      textFont(font24); //sets the current font that will be drawn with text()
-      text("How to play", 10, 30);
-      text("You have a task, survive against the enemy balloons as much as you can.", 10, 60);
-      text("Using your alloted money, purchase towers. Every balloon you pop, the more money you get.", 10, 80);
-      text("Interact with the icons to learn more or purchase",10,100);
-      
-      text("Please Press a Key to Start", 10, 150);
-      if (keyPressed) displayInstructions = false; //stop displaying instructions
-    } else if (displayInstructions == false) { //shall I display title?
+    if (displayTitle) { //shall I display title?
 
       fill(gold);
-      textFont(font72);
-      text("Bloon Tower Defense", 220, 255);
-      //has it been on screen for 2s?
-      if (time - titleStartTime > TITLE_TIME) beginning = displayTitle = false; //stop displaying title
+      textFont(font72); //sets the current font that will be drawn with text()
+      text("Bloon Tower Defense", 220, 180);
+      textFont(font24);
+      text("Created by Kevin Wang, Larry Wong, Alvin Ye", 260, 300);
+      //has it been on screen for 4s?
+      if (time - titleStartTime > TITLE_TIME) displayTitle = false; //stop displaying title
       time = millis();
+    } else if (displayTitle == false) { //shall I display instructions?
+
+      fill(silver);
+      textFont(font24);
+      text("How to play", 10, 30);
+      text("You have a task - to survive against waves of enemy bloons as much as you can.", 10, 60);
+      text("Using your allotted money, purchase weapons. Upgrade them if you can.", 10, 90);
+      text("Popping bloons will earn you money.", 10, 120);
+      text("Interact with the icons on the side panel that will appear to purchase, get more info, & upgrade.", 10, 150);
+      text("Look at the console for any messages that will appear during the game.", 10, 180);
+      text("Good luck!", 10, 210);
+      
+      text("Press a key to start", 10, 270);
+      if (keyPressed) beginning = displayInstructions = false; //stop displaying instructions, end beginning
     }
   } else {
 
@@ -246,11 +245,7 @@ void draw() {
 
 void mouseClicked() {
 
-  //for title displaying
-  if (displayTitle == false && titleDisplayed == 0) {
-    displayTitle = true;
-    titleDisplayed++; //this prevents title from being displayed more than once
-  } else {
+  if (!beginning) {
 
     if (mouseX > 800) {
       if (mouseX >= 832 && mouseX <= 872 && mouseY >= 80 && mouseY <= 120) {
@@ -297,9 +292,8 @@ void mouseClicked() {
 }
 
 void keyPressed() {
-  if (instructionsDisplayed == 0) {
-    titleStartTime = millis(); //start time for displaying title
-    instructionsDisplayed++; //this prevents instructions from being displayed more than once
+  if (instructionsAppeared == 0) {
+    instructionsAppeared++; //this prevents instructions from being displayed more than once
   }
 }
 
