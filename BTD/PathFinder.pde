@@ -1,7 +1,7 @@
 import java.util.*;
 import java.io.*;
 
-public class PathFinder {
+class PathFinder {
 
   final private int MAX_SIZE = 1000; //limit on maze size
   private char[][] maze;
@@ -43,7 +43,7 @@ public class PathFinder {
     }
   }//end constructor
 
-  public void getPath(int colStart, int rowStart) {
+  void getPath(int colStart, int rowStart) {
 
     Node start = new Node(colStart, rowStart, null);
     queue.add( start );
@@ -85,7 +85,7 @@ public class PathFinder {
     return;
   }
 
-  public String toString() {
+  String toString() {
     String s = "";
     for (int i = 0; i < heightM; i++) {
       for (int j = 0; j < widthM; j++) {
@@ -97,7 +97,7 @@ public class PathFinder {
     return s;
   }
 
-  public void solve(String mapName) {
+  void solve() {
     //find path
     this.getPath(1, 1);
     //reset grid
