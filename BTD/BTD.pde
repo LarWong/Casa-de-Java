@@ -339,9 +339,9 @@ void createEnemies(int difficulty) {
       } else if (difficulty == MEDIUM) {
         rand = (int) random(20, 22); //random int between 20-21
       } 
-      if (rand == 20) enemies.add(new bloon(50, 50, crimson)); //crimson bloon
-      else if (rand == 21) enemies.add(new bloon(50, 50, sapphire)); //sapphire bloon
-      else if (rand == 22) enemies.add(new woodenbloon(50, 50)); //wooden bloon
+      if (rand == 20) enemies.add(new bloon(75, 75, crimson)); //crimson bloon
+      else if (rand == 21) enemies.add(new bloon(75, 75, sapphire)); //sapphire bloon
+      else if (rand == 22) enemies.add(new woodenbloon(75, 75)); //wooden bloon
       enemyAppeared = millis();
       numEnemies--;
     }
