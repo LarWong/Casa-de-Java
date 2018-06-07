@@ -3,6 +3,7 @@ class projectile {
   private final static int ALIVE = 0;
   private final static int DEAD = 1;
   private final static int INJURED = 2;
+  private final static int VERYINJURED = 3;
 
   //instance vars
   private int state = ALIVE;
@@ -99,10 +100,20 @@ class projectile {
 
             if (enemy instanceof woodenbloon) {
               if (enemy.getState() == INJURED) { 
-                enemy.pop();
-              } else { //otherwise, the enemy is ALIVE
-                enemy.setState(INJURED);
                 enemy.setColor(crimson);
+              } 
+              else if (enemy.getState() == VERYINJURED) {
+                enemy.setState(DEAD);
+              } 
+              else { //otherwise, the enemy is ALIVE
+                enemy.setState(INJURED);
+                enemy.setColor(sapphire);
+                if(enemy.getXVel() < 0){
+                enemy.setXVel(enemy.getXVel() - 1.5);
+                }
+                else{
+                  enemy.setXVel(enemy.getXVel() + 1.5);
+                }
               }
             }
 

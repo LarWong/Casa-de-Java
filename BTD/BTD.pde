@@ -58,6 +58,15 @@ final int WOODENBLOON = 21;
 //default spawn type
 int spawnType = BLOON;
 
+//vars for waveType
+final int EASY = 100;
+final int MEDIUM = 101;
+final int HARD = 102;
+
+//default waveType
+
+int waveType = 999;
+
 
 
 //game objects
@@ -187,6 +196,14 @@ void draw() {
     shape(freezer, 950, 100);
     shape(tackshooter, 851, 150);
 
+    //wave buttons
+    fill(0, 256, 0);
+    rect(810, 280, 150, 50);
+    fill(0, 0, 256);
+    rect(810, 350, 150, 50);
+    fill(256, 0, 0);
+    rect(810, 420, 150, 50);
+
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
@@ -202,18 +219,21 @@ void draw() {
 
 
     //if (!paused) {
-    createEnemies();
+    createEnemies(waveType);
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
+
     //enemies move
     for (enemy enemy : enemies)
       enemy.move();
 
 
     localPlayer.play();
+
+
     //}
 
 
@@ -224,6 +244,10 @@ void draw() {
       fill(255);
       text("Health:" + localPlayer.getHealth(), 840, 30);
       text("Money:" + localPlayer.getMoney(), 840, 60);
+      text("Easy Wave", 810, 300);
+      text("Medium Wave", 810, 370);
+      text("Hard Wave", 810, 440);
+
       //text("buy tower", 875, 50);
       //text("buy freezer", 875, 150);
       //text("buy tack shooter", 875, 250);
@@ -236,19 +260,30 @@ void mouseClicked() {
 
   if (!beginning) {
 
-    if (mouseX > 800) {
+    if (mouseX > 800) { //the click is within the side panel
       if (mouseX >= 832 && mouseX <= 872 && mouseY >= 80 && mouseY <= 120) {
         weaponState = TOWER;
         println("place your tower");
+        println("======Tower======\nAttack Speed: Medium\nCost: 30\nShoots single projectiles across the screen");
       } else if (mouseX >= 930 && mouseX <= 970 && mouseY >= 80 && mouseY <= 120) {
         weaponState = FREEZER;
         println("place your freezer");
+        println("======Freezer======\nAttack Speed: Infinite\nCost: 70\nSlows down bloons that come near it");
       } else if (mouseX >= 832 && mouseX <= 872 && mouseY >= 130 && mouseY <= 170) {
         weaponState = TACKSHOOTER;
         println("place your tack shooter");
+        println("======Tack Shooter======\nAttack Speed: Slow\nCost: 100\nShoots 6 projectiles across the screen");
+      } else if (mouseX >= 810 && mouseX <= 960 && mouseY >= 280 && mouseY <= 330) {
+        numEnemies = 20 * localPlayer.getLevel(); //resets enemy level
+        waveType = EASY;
+      } else if (mouseX >= 810 && mouseX <= 960 && mouseY >= 350 && mouseY <= 400) {
+        numEnemies = 20 * localPlayer.getLevel(); //resets enemy level
+        waveType = MEDIUM;
+      } else if (mouseX >= 810 && mouseX <= 960 && mouseY >= 420 && mouseY <= 470) {
+        numEnemies = 20 * localPlayer.getLevel(); //resets enemy level
+        waveType = HARD;
       }
-    }
-
+    } 
     //creates a new weapon upon click if player has enough money
     //if (localPlayer.getMoney() >= 30) {
     else { 
@@ -277,13 +312,19 @@ void keyPressed() {
   }
 }
 
-void createEnemies() {
-
+void createEnemies(int difficulty) {
   if (numEnemies != 0) {
     if (millis() - enemyAppeared >= 800) {
 
-      int rand = (int) random(20, 23); //random int between 20-21
+      int rand = 999;
 
+      if (difficulty == EASY) {
+        rand = 20;
+      } else if (difficulty == HARD) {
+        rand = (int) random(20, 23); //random int between 20-22
+      } else if (difficulty == MEDIUM) {
+        rand = (int) random(20, 22); //random int between 20-21
+      } 
       if (rand == 20) enemies.add(new bloon(50, 50, crimson)); //crimson bloon
       else if (rand == 21) enemies.add(new bloon(50, 50, sapphire)); //sapphire bloon
       else if (rand == 22) enemies.add(new woodenbloon(50, 50)); //wooden bloon
