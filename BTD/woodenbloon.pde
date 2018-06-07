@@ -10,6 +10,7 @@ class woodenbloon extends enemy {
   //float size;
   
   final static int INJURED = 2;
+  final static int VERYINJURED = 3;
 
   //default constructor
   woodenbloon() {
@@ -20,8 +21,8 @@ class woodenbloon extends enemy {
     //////////////////////////////////////////////////////////
     //////////////////////////////////////////////////////////
     xCor = yCor = 50;
-    xVel = 2;
-    origXVel = 2;
+    xVel = 0.5;
+    origXVel = 0.5;
     yVel = 0;
     size = 50;
   }
