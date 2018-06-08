@@ -1,21 +1,17 @@
+//subclass of Weapon
 class Freezer extends Weapon {
 
-  //inherited vars that are used
-  //final static int DEAD = 1;
-  //float xCor, yCor;
-  //int price;
-  //int lastFiredTime = millis();
-
+  //default constructor
   Freezer() {
     price = 70;
   }
-
+  //overloaded constructor
   Freezer(float mX, float mY) {
     this();
     xCor = mX;
     yCor = mY;
   }
-
+  //how this subclass attacks
   void atck() {
     shape(freezer, xCor, yCor); //shape of freezer
 

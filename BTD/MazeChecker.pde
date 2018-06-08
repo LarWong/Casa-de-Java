@@ -1,14 +1,17 @@
 /***
  * ALGORITHM for finding exit from starting position:
  *  Algorithm:
- * - Begin at the "start position"
- * - For each path space, check all four spaces immediately adjacent to the current space.
- * - If one of these surrounding spaces is a "*", update the position to that space
- * - Otherwise, if there are no * around, backtrack to the last spot with multiple options to move, similar to the knight's tour.
- * - Keep moving until the final position is reached, denoted with a "&"
+ * 1. Begin at the "start position"
+ * 2. For each path space, check all four spaces immediately adjacent to the current space.
+ * 3. If one of these surrounding spaces is a "*", update the position to that space
+ * 4. Otherwise, if there are no * around, backtrack to the last spot with multiple options to move, similar to the knight's tour.
+ * 5. Keep moving until the final position is reached, denoted with a "&"
  ***/
 class MazeChecker {
+  //constant
   final private int MAX_SIZE = 1000; //limit on maze size
+  
+  //instance vars
   private char[][] maze;
   private boolean solved;
 
@@ -21,6 +24,7 @@ class MazeChecker {
 
 
 
+  //constructor - reads the txt file into a 2D array
   public MazeChecker(String map) {
     try {
       String[] lines = loadStrings(map);
@@ -32,13 +36,14 @@ class MazeChecker {
         }
       }
 
-      solved = false;
+      solved = false; //default state: no solution
     } 
     catch(Exception e) {
       System.out.println( "Error reading file" );
     }
   }//end constructor
 
+  //uses a Depth First Search approach to determine of the maze is solvable
   void solve( int currX, int currY ) {
     //primary base case
     if ( maze[currX][currY] == THE_EXIT ) {
@@ -48,13 +53,13 @@ class MazeChecker {
     else if ( maze[currX][currY] == PATH) {
       maze[currX][currY] = CURRENT;
 
-      if ( !solved )
+      if ( !solved )//down
         solve( currX, currY-1 );
-      if ( !solved )
+      if ( !solved )//right
         solve( currX+1, currY );
-      if ( !solved )
+      if ( !solved )//up
         solve( currX, currY+1 );
-      if ( !solved )
+      if ( !solved )//left
         solve( currX-1, currY );
 
       maze[currX][currY] = VISITED_PATH;
@@ -62,6 +67,7 @@ class MazeChecker {
     return;
   }
 
+  //wrapper method
   public boolean checkMaze() {
     this.solve(1, 1);
     return solved;

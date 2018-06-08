@@ -1,5 +1,5 @@
 import java.util.ArrayList;
-
+//Superclass for this game's weapons
 abstract class Weapon {
 
   //final vars
@@ -12,6 +12,7 @@ abstract class Weapon {
   protected int lastFiredTime = millis();
   protected ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
+  // Accessors
   int getPrice() {
     return price;
   }
@@ -20,6 +21,7 @@ abstract class Weapon {
     return projectiles.toString();
   }
 
+  //default way of attacking enemies
   void atck() {
 
     for (Projectile projectile : projectiles) projectile.move(); //projectiles move
@@ -45,6 +47,4 @@ abstract class Weapon {
     }
   }
 
-  void upgrade() {
-  }
 }

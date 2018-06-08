@@ -1,4 +1,5 @@
-class Node {
+// for PathFinder, holds information regarding a tile in the maze
+class Node { 
   int xCor;
   int yCor;
   Node parentNode;
@@ -9,6 +10,7 @@ class Node {
     this.parentNode = parent;
   }
 
+  // Acessors
   public Node getParent() {
     return this.parentNode;
   }
@@ -19,9 +21,9 @@ class Node {
 
   public int getY() {
     return this.yCor;
-
   }
 
+  // for debugging purposes
   public String toString() {
     return "col = " + this.xCor + " row = " + this.yCor;
   }

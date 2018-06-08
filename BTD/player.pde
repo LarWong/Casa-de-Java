@@ -16,6 +16,7 @@ class Player {
     level = 1;
   }
 
+  // Accessors
   String getWeapons() {
     return weapons.toString();
   }
@@ -23,15 +24,20 @@ class Player {
   int getMoney() {
     return money;
   }
+  
+  int getHealth() {
+    return health;
+  }
 
+  int getLevel() {
+    return level;
+  }
+  
+  // Mutators
   int setMoney(int newMoney) {
     int temp = money;
     money = newMoney;
     return temp;
-  }
-
-  int getHealth() {
-    return health;
   }
 
   int setHealth(int newHealth) {
@@ -40,9 +46,6 @@ class Player {
     return temp;
   }
 
-  int getLevel() {
-    return level;
-  }
 
   int setLevel(int newLevel) {
     int temp = level;
@@ -50,6 +53,7 @@ class Player {
     return temp;
   }
 
+  // creates the user's towers
   void play() {
 
     //tell each weapon to attack
@@ -58,6 +62,8 @@ class Player {
     }
   }
 
+  //user creates towers by buying them
+  //determines if user can buy and what he/she buys
   void buy(float mX, float mY, float type) {
     if (type == TOWER) {
       Weapon t = new Tower(mX, mY);
@@ -74,6 +80,4 @@ class Player {
     }
   }
 
-  void specialPower() {
-  }
 }

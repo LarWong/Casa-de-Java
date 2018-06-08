@@ -1,17 +1,13 @@
+// A subclass of Weapon
 class TackShooter extends Weapon {
 
-  //inherited vars that are used
-  //final static int DEAD = 1;
-  //float xCor, yCor;
-  //int speed, price;
-  //int lastFiredTime = millis();
-  //ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
-
+  //default constructor
   TackShooter() {
     speed = 1;
     price = 100;
   }
 
+  //overloaded constructor
   TackShooter(float mX, float mY) {
     this();
     xCor = mX;
@@ -19,6 +15,7 @@ class TackShooter extends Weapon {
   }
 
 
+  // how this subclass attacks
   void atck() {
 
     shape(tackshooter, xCor, yCor); //shape of tack shooter

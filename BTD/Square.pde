@@ -1,3 +1,4 @@
+// class for each square in the grid during creation process
 class Square {
 
   //============final vars=================
@@ -25,6 +26,7 @@ class Square {
     this.boxsize = actualBoxsize;
 
     this.setState(WALL);// default option
+    // determine what the square will do/will be
     if (row == 0 || col == 0 || row == rows - 1 || col == cols - 1) { 
       this.setState(BORDER);
     }
@@ -44,6 +46,8 @@ class Square {
     this.changeColor();
   }
 
+  // for the user to create their own path
+  // user only allowed to change the walls/paths
   void changeState() {
     if (state == WALL || state == PATH) {
       this.state++;
@@ -52,6 +56,7 @@ class Square {
     }
   }
 
+  //determines how the square will be represented on the grid
   void changeColor() {
     if (this.state == WALL) c = color(255, 255, 255); //white
     if (this.state == PATH) c = color(255, 0, 0); //red
@@ -62,16 +67,19 @@ class Square {
     if (this.state == CLEAR) c = color(130, 130, 0); //yellowish-brown
   }
 
+  //creates a visual (the grid)
   void appear(int row, int col) {
     this.changeColor();
     fill(this.c);
     rect(col*boxsize, row*boxsize, boxsize, boxsize);
   }
 
+  // Accessor
   int getState() {
     return this.state;
   }
-
+  
+  // Mutator
   void setState(int changeState) {
     switch(changeState) {
     case 0: 

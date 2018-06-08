@@ -1,13 +1,5 @@
+//subclass of Enemy
 class Bloon extends Enemy {
-
-  //inherited vars
-  //final static int ALIVE = 0;
-  //final static int DEAD = 1;
-  //int state = ALIVE;
-  //color c;
-  //float xCor, yCor;
-  //float speed;
-  //float oSpeed;
 
   //default constructor
   Bloon() {

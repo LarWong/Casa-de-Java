@@ -75,11 +75,8 @@ void setup() {
    different canvas size and renderer options
    must be first thing in setup
    ******************************************/
-  //size(1000, 500);
   size(1000, 500, P2D); //faster than default renderer for most tasks, but sacrifices some visual quality for speed
   background(15); //not pure black
-  //noStroke(); //disables outlines
-  //frameRate(240); //for developer testing
 
 
   /******************************
@@ -145,12 +142,11 @@ void setup() {
 void draw() {
 
   clear(); //creates illusion of animation
-  if(localPlayer.getHealth() == 0){
-   println("YOU LOST");
-    
+  if (localPlayer.getHealth() == 0) {
+    println("YOU LOST");
   }
-  
-  
+
+
   if (beginning) {
 
     if (titleAppeared == 0) {
@@ -173,7 +169,7 @@ void draw() {
       fill(silver);
       textFont(font24);
       text("How to play", 10, 30);
-      text("First you have to use the map creator to make a custom map for the bloons.", 10,60);
+      text("First you have to use the map creator to make a custom map for the bloons.", 10, 60);
       text("You have a task - to survive against waves of enemy bloons as much as you can.", 10, 90);
       text("Using your allotted money, purchase weapons.", 10, 120);
       text("Popping bloons will earn you money.", 10, 150);
@@ -220,6 +216,7 @@ void draw() {
       for (Enemy enemy : enemies)
         enemy.move();
     }
+
     localPlayer.play();
 
     //health status
@@ -237,10 +234,12 @@ void draw() {
   }
 }
 
+//function varies with state of game
 void mouseClicked() {
-
+  // if map is not created yet, mouse changes tile color
   if (!mapCreation) {
     world.mapClick(mouseX, mouseY);
+    // creation done, placing towers
   } else if (!beginning && mapCreation) {
 
     if (mouseX > 800) { //the click is within the side panel
@@ -257,14 +256,14 @@ void mouseClicked() {
         println("place your tack shooter");
         println("======Tack Shooter======\nAttack Speed: Slow\nCost: 100\nShoots 6 projectiles across the screen");
       } else if (mouseX >= 801 && mouseX <= 1000 && mouseY >= 450 && mouseY <= 500) {
-        paused = false;
+        paused = !paused;
       }
     } 
 
     //creates a new weapon upon click if player has enough money
     else { 
       //if it's on enemy path
-      if (get(mouseX, mouseY) == color(0,100,0))
+      if (get(mouseX, mouseY) == color(0, 100, 0))
         println("INVALID PLACEMENT");
       else {
         if (weaponState == TOWER) {
@@ -280,13 +279,16 @@ void mouseClicked() {
   }
 }
 
+// used to transition from into to game
 void keyPressed() {
   if (instructionsAppeared == 0) {
     instructionsAppeared++; //this prevents instructions from being displayed more than once
   }
 }
 
+// spawns the enemies
 void createEnemies() {
+  //creates the enemies
   if (numEnemies != 0) {
     if (millis() - enemyAppeared >= 800) {
 

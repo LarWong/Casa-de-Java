@@ -1,3 +1,4 @@
+//Superclass for this game's enemies
 abstract class Enemy {
 
   //final vars
@@ -14,14 +15,9 @@ abstract class Enemy {
   protected int nextDirection = -1;
   protected boolean slowed;
 
+  // Accessors
   int getState() {
     return state;
-  }
-
-  int setState(int newState) {
-    int temp = state;
-    state = newState;
-    return temp;
   }
 
   float getXCor() {
@@ -36,12 +32,6 @@ abstract class Enemy {
     return speed;
   }
 
-  float setSpeed(float newSpeed) {
-    float temp = speed;
-    speed = newSpeed;
-    return temp;
-  }
-
   float getOSpeed() {
     return oSpeed;
   }
@@ -50,20 +40,35 @@ abstract class Enemy {
     return slowed;
   }
 
+  //Mutators
   boolean setSlowed(boolean newSlowed) {
     boolean temp = slowed;
     slowed = newSlowed;
     return temp;
   }
 
-  void move() {
+  int setState(int newState) {
+    int temp = state;
+    state = newState;
+    return temp;
+  }
 
+  float setSpeed(float newSpeed) {
+    float temp = speed;
+    speed = newSpeed;
+    return temp;
+  }
+
+  // determines how a enemty moves
+  void move() {
+    //moves only if it is alive
     if (state != DEAD) {
       if ((abs(xCor - (int) (50 * floor((xCor - 75) / 50.0)) - 75) <= 1) && (abs(yCor - (int) (50 * floor((yCor - 75) / 50.0)) - 75) <= 1)) {
         xCor = (int) (50 * floor((xCor - 75) / 50.0)) + 75;
         yCor = (int) (50 * floor((yCor - 75) / 50.0)) + 75;
         nextDirection = checkPath();
       }
+      //follows the green path (shortest path to exit)
       if (nextDirection == 0) {
         prevDirection = 1;
         yCor += -10;//-speed;
@@ -81,12 +86,6 @@ abstract class Enemy {
       fill(c);
       ellipse(xCor, yCor, 30, 40);
 
-      //if (xCor < 75 || xCor > 725 - speed) {
-      //  speed *= -1;
-      //  oSpeed = speed;
-      //  yCor += 50;
-      //}
-      //xCor += speed;
       //if enemy got through user's defenses
       if (xCor >= 725 && yCor >= 425) {
         state = DEAD;
@@ -95,6 +94,7 @@ abstract class Enemy {
     }
   }
 
+  //How a enemy's condition is shown to the user, used when an enemy loses health
   void pop() {
     if (c == silver) {
       c = gold;
@@ -113,6 +113,7 @@ abstract class Enemy {
     } else state = DEAD;
   }
 
+  //checks where the shortest path is
   int checkPath() {
     //get the coords of pixel to check
     int[][] directions = {{0, -50}, {0, 50}, {-50, 0}, {50, 0}};

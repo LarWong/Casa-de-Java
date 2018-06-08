@@ -1,5 +1,7 @@
+// what each weapon produces
 class Projectile {
 
+  //constants
   private final static int ALIVE = 0;
   private final static int DEAD = 1;
 
@@ -23,11 +25,12 @@ class Projectile {
     xVel = 25 * newXVel;
   }
 
-
+  // Accessor
   int getState() {
     return state;
   }
 
+  // projectiles move accross the screen
   void move() {
 
     collide(); //check for collision with enemy
@@ -37,8 +40,13 @@ class Projectile {
       xCor += xVel;
       yCor += yVel;
     }
+    //projectiles die after exiting the map 
+    if (xCor > 790 || xCor < 10 || yCor > 490 || yCor < 10) {
+      state = DEAD;
+    }
   }
 
+  //damages the enemy is they collide
   void collide() {
 
     if (state != DEAD) { //only projectiles that have not hit an enemy
