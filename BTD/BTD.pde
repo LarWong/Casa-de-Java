@@ -217,6 +217,12 @@ void draw() {
         enemy.move();
     }
 
+    if (enemies.size() == 0) {
+      localPlayer.setLevel(localPlayer.getLevel() + 1);
+      numEnemies = (int) (20 * log(localPlayer.getLevel()) + 5);
+      paused = true;
+    }
+
     localPlayer.play();
 
     //health status
