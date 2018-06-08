@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 /***********************************************************************
- fonts for size 36 & 72, respectively //<>//
+ fonts for size 36 & 72, respectively
  PFont is font clsass for Processing
  fonts must be located in sketch's "data" directory to load successfully
  ***********************************************************************/
@@ -16,25 +16,25 @@ PShape tower, freezer, freezerInner, freezerOuter, tackshooter, tackshooterCircl
 //*************colors**************
 color crimson = color(220, 20, 60);
 color sapphire = color(8, 37, 103);
-color wood = color(222, 184, 135);
 color moss = color(173, 223, 173);
+color wood = color(222, 184, 135);
 color rose = color(255, 85, 163);
 color ice = color(212, 240, 255);
 color gold = color(212, 175, 55);
 color silver = color(192);
 //*********************************
 
-int time = 0; //stores milliseconds since start of run
+int time = 0; //stores # of milliseconds since start of run
 boolean paused = true; //determines whether battle takes place defaults to false
 
 
 
 boolean beginning = true; //whether program is in the beginning, defaults to true
-boolean creationDone = false; //determine if user is in map creation stage
+boolean mapCreation; //whether user is in map creation stage, defaults to false
 
 //title display vars
 boolean displayTitle = true; //whether to display title, defaults to true
-int titleAppeared; //whether title has appeared or not -- 0 is false, any other # is true 
+int titleAppeared; //whether title has appeared or not -- 0 is false, any other # is true
 int titleStartTime; //time when title appeared
 final int TITLE_TIME = 5000; //how long to display title, 5s
 
@@ -52,34 +52,19 @@ final int TACKSHOOTER = 3;
 //default weapon state
 int weaponState = TOWER;
 
-//vars for spawning bloons
-final int BLOON = 20;
-final int WOODENBLOON = 21;
-
-//default spawn type
-int spawnType = BLOON;
-
-//vars for waveType
-final int EASY = 100;
-final int MEDIUM = 101;
-final int HARD = 102;
-
-//default waveType
-
-int waveType = 999;
 
 
+//***************game objects***************
+Player localPlayer = new Player();
 
-//game objects
-player localPlayer = new player();
 CreateMap world = new CreateMap(500, 800, 50);
 
 //background tiles
-Square[][] bacgroundPixels;
+Square[][] backgroundPixels;
 
-//enemies 
-ArrayList<enemy> enemies = new ArrayList<enemy>(); //here lies all enemies
-int numEnemies = 20 * localPlayer.getLevel(); //# of enemies based on user level
+//enemies
+ArrayList<Enemy> enemies = new ArrayList<Enemy>(); //here lies all enemies
+int numEnemies = (int) (20 * log(localPlayer.getLevel()) + 5); //# of enemies based on user level, log is in base e
 int enemyAppeared; //time since last enemy appeared
 
 
@@ -190,9 +175,19 @@ void draw() {
       text("Look at the console for any messages that will appear during the game.", 10, 180);
       text("Good luck!", 10, 210);
 
-      text("Press any key to start", 10, 270);
-      if (keyPressed) beginning = displayInstructions = false; //stop displaying instructions, end beginning
+      text("Press any key to start.", 10, 270);
+      if (keyPressed) {
+        beginning = displayInstructions = false; //stop displaying instructions, end beginning
+      }
     }
+  } else if (!mapCreation) { //map creation process
+
+    //print out instructions
+    println("Press the yellow box to clear.");
+    println("Press the cyan to submit.");
+
+    //create map
+    mapCreation = world.creationProcess();
   } else {
 
     //side panel for UI
@@ -202,50 +197,24 @@ void draw() {
     shape(freezer, 950, 100);
     shape(tackshooter, 851, 150);
 
-    //wave buttons
-    fill(0, 256, 0);
-    rect(810, 280, 150, 50);
-    fill(0, 0, 256);
-    rect(810, 350, 150, 50);
-    fill(256, 0, 0);
-    rect(810, 420, 150, 50);
+    //start button
+    fill(10, 150, 10);
+    rect(801, 450, 199, 50);
 
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //path
-    //Map creation process
-    if (!creationDone) {
-      //print out instructions
-      fill(255,255,255); //white
-      textFont(font24); // font type
-      text("Yellow to Clear", 825, 200);
-      text("Cyan to Submit", 825, 250);
-      //creating map 
-      creationDone = world.creationProcess();
-    } 
-    //if (!paused) {
-    if (creationDone) {
-      //print the map with shortest path in green
-      world.printMap();
-      createEnemies(waveType);
-      //////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////
-      //////////////////////////////////////////////////////////
+    //print path of map in green
+    world.printMap();
+
+    //gameplay is taking place
+    if (!paused) {
+
+      //spawn the enemies
+      createEnemies();
+
       //enemies move
-      for (enemy enemy : enemies)
+      for (Enemy enemy : enemies)
         enemy.move();
     }
-
     localPlayer.play();
-
-
-    //}
-
 
     //health status
     textFont(font24);
@@ -254,13 +223,9 @@ void draw() {
       fill(255);
       text("Health:" + localPlayer.getHealth(), 840, 30);
       text("Money:" + localPlayer.getMoney(), 840, 60);
-      text("Easy Wave", 810, 300);
-      text("Medium Wave", 810, 370);
-      text("Hard Wave", 810, 440);
 
-      //text("buy tower", 875, 50);
-      //text("buy freezer", 875, 150);
-      //text("buy tack shooter", 875, 250);
+      text("Start", 875, 480);
+
       //println("Health: " + localPlayer.getHealth() + " Money: " + localPlayer.getMoney()); //prints to console
     }
   }
@@ -268,15 +233,15 @@ void draw() {
 
 void mouseClicked() {
 
-  if (!creationDone) {
+  if (!mapCreation) {
     world.mapClick(mouseX, mouseY);
-  } else if (!beginning && creationDone) {
+  } else if (!beginning && mapCreation) {
 
     if (mouseX > 800) { //the click is within the side panel
       if (mouseX >= 832 && mouseX <= 872 && mouseY >= 80 && mouseY <= 120) {
         weaponState = TOWER;
         println("place your tower");
-        println("======Tower======\nAttack Speed: Medium\nCost: 30\nShoots single projectiles across the screen");
+        println("======Tower======\nAttack Speed: Medium\nCost: 30\nShoots vertical projectiles across the screen");
       } else if (mouseX >= 930 && mouseX <= 970 && mouseY >= 80 && mouseY <= 120) {
         weaponState = FREEZER;
         println("place your freezer");
@@ -285,19 +250,12 @@ void mouseClicked() {
         weaponState = TACKSHOOTER;
         println("place your tack shooter");
         println("======Tack Shooter======\nAttack Speed: Slow\nCost: 100\nShoots 6 projectiles across the screen");
-      } else if (mouseX >= 810 && mouseX <= 960 && mouseY >= 280 && mouseY <= 330) {
-        numEnemies = 20 * localPlayer.getLevel(); //resets enemy level
-        waveType = EASY;
-      } else if (mouseX >= 810 && mouseX <= 960 && mouseY >= 350 && mouseY <= 400) {
-        numEnemies = 20 * localPlayer.getLevel(); //resets enemy level
-        waveType = MEDIUM;
-      } else if (mouseX >= 810 && mouseX <= 960 && mouseY >= 420 && mouseY <= 470) {
-        numEnemies = 20 * localPlayer.getLevel(); //resets enemy level
-        waveType = HARD;
+      } else if (mouseX >= 801 && mouseX <= 1000 && mouseY >= 450 && mouseY <= 500) {
+        paused = false;
       }
     } 
+
     //creates a new weapon upon click if player has enough money
-    //if (localPlayer.getMoney() >= 30) {
     else { 
       //temp variables for the path y-coordinates
       int a = 25;
@@ -313,7 +271,16 @@ void mouseClicked() {
         (mouseY > d && mouseY < d + 50) || 
         (mouseY > e && mouseY < e + 50))
         println("INVALID PLACEMENT");
-      else localPlayer.buy(mouseX, mouseY, weaponState);
+      else {
+        /*if (weaponState == TOWER) {
+         if (localPlayer.getMoney() < 30) return;
+         } else if (weaponState == FREEZER) {
+         if (localPlayer.getMoney() < 70) return;
+         } else if (weaponState == TACKSHOOTER) {
+         if (localPlayer.getMoney() < 100) return;
+         }*/
+        localPlayer.buy(mouseX, mouseY, weaponState);
+      }
     }
   }
 }
@@ -324,24 +291,15 @@ void keyPressed() {
   }
 }
 
-void createEnemies(int difficulty) {
+void createEnemies() {
   if (numEnemies != 0) {
     if (millis() - enemyAppeared >= 800) {
 
-      int rand = 999;
-      if (rand == 20) enemies.add(new bloon(75, 75, crimson)); //crimson bloon
-      else if (rand == 21) enemies.add(new bloon(75, 75, sapphire)); //sapphire bloon
-      else if (rand == 22) enemies.add(new woodenbloon(75, 75)); //wooden bloon
-      if (difficulty == EASY) {
-        rand = 20;
-      } else if (difficulty == HARD) {
-        rand = (int) random(20, 23); //random int between 20-22
-      } else if (difficulty == MEDIUM) {
-        rand = (int) random(20, 22); //random int between 20-21
-      } 
-      if (rand == 20) enemies.add(new bloon(75, 75, crimson)); //crimson bloon
-      else if (rand == 21) enemies.add(new bloon(75, 75, sapphire)); //sapphire bloon
-      else if (rand == 22) enemies.add(new woodenbloon(75, 75)); //wooden bloon
+      int rand = (int) random(20, 24);
+      if (rand == 20) enemies.add(new Bloon(75, 75, crimson)); //crimson bloon
+      else if (rand == 21) enemies.add(new Bloon(75, 75, sapphire)); //sapphire bloon
+      else if (rand == 22) enemies.add(new Bloon(75, 75, moss)); //moss bloon
+      else if (rand == 23) enemies.add(new Bloon(75, 75, wood)); //wooden bloon
       enemyAppeared = millis();
       numEnemies--;
     }

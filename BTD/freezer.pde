@@ -1,57 +1,37 @@
-class freezer extends weapon {
+class Freezer extends Weapon {
 
-  //has these vars inherited from weapon
-  //final static int ALIVE = 0;
+  //inherited vars that are used
   //final static int DEAD = 1;
-  //int state = ALIVE;
-  //int HP;
-  //color c;
   //float xCor, yCor;
-  //float size;
-  //int atck, speed, price;
-  //boolean fired;
+  //int price;
   //int lastFiredTime = millis();
-  //protected ArrayList<projectile> projectiles = new ArrayList<projectile>();
 
-  freezer() {
-    HP = 100;
-    size = 40;
-    atck = 10;
-    speed = 1;
+  Freezer() {
     price = 70;
   }
 
-  freezer(float mX, float mY) {
+  Freezer(float mX, float mY) {
     this();
     xCor = mX;
     yCor = mY;
   }
 
   void atck() {
-    shape(freezer, xCor, yCor); //shape of tower
+    shape(freezer, xCor, yCor); //shape of freezer
 
-    if (time - lastFiredTime > 1200.0 / speed) { //weapon has certain cooldown
-      for (enemy enemy : enemies) {
-        if (enemy.getState() != DEAD) {
+    for (Enemy enemy : enemies) {
+      if (enemy.getState() != DEAD) {
 
-          float distance = pow(this.xCor - enemy.xCor, 2) + pow(this.yCor - enemy.yCor, 2) + 20; //dist btwn projectile & center of enemy
+        float distance = pow(this.xCor - enemy.getXCor(), 2) + pow(this.yCor - enemy.getYCor(), 2); //dist btwn centers of freezer & of enemy
 
-          //checks if dist is close enough
-          if (distance <= pow(this.size + enemy.size, 2)) {
-            //enemy.setHP(enemy.getHP() - atck);
-            //////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////
-            //////////////////////////////////////////////////////////NOT ALWAYS
-            if (enemy.getXVel() > 1) {
-              enemy.setXVel(enemy.getXVel() - 0.5); //enemy slows down when traveling right
-            } else if (enemy.getXVel() < -1) { //enemy slows down when traveling left
-              enemy.setXVel(enemy.getXVel() + 0.5);
-            }
-          } else { //speed returns to normal
-            enemy.setXVel(enemy.getOrigXVel());
-          }
+        //checks if dist is close enough
+        if (enemy.getSlowed() == false && distance <= 5000) {
+          enemy.setSpeed(0.5 * enemy.getSpeed()); //reduce speed of enemy
+          enemy.setSlowed(true);
+        }
+        else {
+          enemy.setSpeed(enemy.getOSpeed()); //enemy speed returns to normal
+          enemy.setSlowed(false);
         }
       }
     }

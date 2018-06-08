@@ -1,109 +1,19 @@
 import java.util.ArrayList;
 
-abstract class weapon {
+abstract class Weapon {
 
-  //final state vars
+  //final vars
   protected final static int ALIVE = 0;
   protected final static int DEAD = 1;
 
   //instance vars
-  protected int state = ALIVE;
-  protected int HP;
-  protected color c;
   protected float xCor, yCor;
-  protected float size;
-  protected int atck, speed, price;
+  protected int speed, price;
   protected int lastFiredTime = millis();
-  protected ArrayList<projectile> projectiles = new ArrayList<projectile>();
-
-  int getState() {
-    return state;
-  }
-
-  int setState(int newState) {
-    int temp = state;
-    state = newState;
-    return temp;
-  }
-
-  int getHP() {
-    return HP;
-  }
-
-  int setHP(int newHP) {
-    int temp = HP;
-    HP = newHP;
-    return temp;
-  }
-
-  color getColor() {
-    return c;
-  }
-
-  color setColor(color newC) {
-    int temp = c;
-    c = newC;
-    return temp;
-  }
-
-  float getXCor() {
-    return xCor;
-  }
-
-  float setXCor(float newXCor) {
-    float temp = xCor;
-    xCor = newXCor;
-    return temp;
-  }
-
-  float getYCor() {
-    return yCor;
-  }
-
-  float setYCor(float newYCor) {
-    float temp = yCor;
-    yCor = newYCor;
-    return temp;
-  }
-
-  float getSize() {
-    return size;
-  }
-
-  float setSize(float newSize) {
-    float temp = size;
-    size = newSize;
-    return temp;
-  }
-
-  int getAtck() {
-    return atck;
-  }
-
-  int setAtck(int newAtck) {
-    int temp = atck;
-    atck = newAtck;
-    return temp;
-  }
-
-  int getSpeed() {
-    return speed;
-  }
-
-  int setSpeed(int newSpeed) {
-    int temp = speed;
-    speed = newSpeed;
-    return temp;
-  }
+  protected ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
   int getPrice() {
     return price;
-  }
-
-  int setPrice(int newPrice) {
-    int temp = price;
-    price = newPrice;
-    return temp;
   }
 
   String getProjectiles() {
@@ -112,11 +22,12 @@ abstract class weapon {
 
   void atck() {
 
-    for (projectile projectile : projectiles) projectile.move(); //projectiles move
+    for (Projectile projectile : projectiles) projectile.move(); //projectiles move
 
-    if (time - lastFiredTime > 12000.0 / speed) { //weapon has certain cooldown
+    if (time - lastFiredTime > 4000.0 / speed) { //weapon has certain cooldown
       lastFiredTime = millis();
-      projectiles.add(new projectile(xCor, yCor - 10, speed, atck)); //create a new projectile
+      projectiles.add(new Projectile(xCor, yCor - 10, speed)); //create a new projectile
+      projectiles.add(new Projectile(xCor, yCor - 10, -speed));
 
       //remove projectiles that are dead
       int i = 0;

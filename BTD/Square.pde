@@ -1,6 +1,6 @@
 class Square {
 
-  //============final vars=========================
+  //============final vars=================
   final static int WALL = 0;
   final static int PATH = 1;
   final static int END = 2;
@@ -8,9 +8,9 @@ class Square {
   final static int BORDER = 4;
   final static int CONFIRM = 5;
   final static int CLEAR = 6;
-  //===============================================
+  //=======================================
 
-  //vars 
+  //instance vars 
   private int state;
   private int rows;
   private int cols;

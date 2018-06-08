@@ -1,17 +1,17 @@
 import java.util.ArrayList;
 
-class player {
+class Player {
 
   //instance vars
-  private ArrayList<weapon> weapons;
+  private ArrayList<Weapon> weapons;
   private int money;
   private int health;
   private int level;
 
   //default constructor
-  player() {
-    weapons = new ArrayList<weapon>();
-    money = 500;
+  Player() {
+    weapons = new ArrayList<Weapon>();
+    money = 100;
     health = 100;
     level = 1;
   }
@@ -53,22 +53,22 @@ class player {
   void play() {
 
     //tell each weapon to attack
-    for (weapon weapon : weapons) {
+    for (Weapon weapon : weapons) {
       weapon.atck();
     }
   }
 
   void buy(float mX, float mY, float type) {
     if (type == TOWER) {
-      weapon t = new tower(mX, mY);
+      Weapon t = new Tower(mX, mY);
       setMoney(getMoney() - t.getPrice()); 
       weapons.add(t);
     } else if (type == FREEZER) {
-      weapon t = new freezer(mX, mY);
+      Weapon t = new Freezer(mX, mY);
       setMoney(getMoney() - t.getPrice()); 
       weapons.add(t);
     } else if (type == TACKSHOOTER) {
-      weapon t = new tackshooter(mX, mY);
+      Weapon t = new TackShooter(mX, mY);
       setMoney(getMoney() - t.getPrice()); 
       weapons.add(t);
     }

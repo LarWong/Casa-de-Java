@@ -1,42 +1,40 @@
-class bloon extends enemy {
-  //inherited instance vars
+class Bloon extends Enemy {
+
+  //inherited vars
   //final static int ALIVE = 0;
   //final static int DEAD = 1;
   //int state = ALIVE;
-  //int HP = 100;
   //color c;
   //float xCor, yCor;
-  //float xVel, yVel;
-  //float size;
+  //float speed;
+  //float oSpeed;
 
   //default constructor
-  bloon() {
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    xCor = yCor = 50;
-    xVel = 2;
-    origXVel = 2;
-    yVel = 0;
-    size = 50;
+  Bloon() {
+    xCor = yCor = 75;
   }
 
-  bloon(float mX, float mY, color newColor) {
-    this();
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
-    //////////////////////////////////////////////////////////
+  //overloaded constructor
+  Bloon(float mX, float mY, color newColor) {
     xCor = mX;
     yCor = mY;
     c = newColor;
-  }
-
-  void pop() {
-    if (c == sapphire) c = crimson;
-    else if (c == crimson) state = DEAD;
+    if (c == silver) {
+      oSpeed = speed = 16;
+    } else if (c == gold) {
+      oSpeed = speed = 12;
+    } else if (c == ice) {
+      oSpeed = speed = 10;
+    } else if (c == rose) {
+      oSpeed = speed = 8;
+    } else if (c == wood) {
+      oSpeed = speed = 4;
+    } else if (c == moss) {
+      oSpeed = speed = 6;
+    } else if (c == sapphire) {
+      oSpeed = speed = 5;
+    } else if (c == crimson) {
+      oSpeed = speed = 4;
+    }
   }
 }
