@@ -15,6 +15,8 @@ OBSTACLES OVERCOME
 
  - Created a path-creation and path-solving algorithm
  
+ - Reading and manipulating txt files
+ 
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
