@@ -9,19 +9,39 @@ Pd. 8
 ------------------------------------------
 OBSTACLES OVERCOME
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
+ - Created multiple functioning classes of balloons that respond to towers
+
+ - Created multiple functioning classes of player towers that have different effects like the real BTD game. 
+
+ - Created a path-creation and path-solving algorithm
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- We have yet to develop a path-solving algorithm for a path that loops back into itself.
 
+- Also, we did not have enough time to give the player special cool-down powers, despite hoping to do so in the start
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Depth First Search algorithm which searches the nodes of a root node by checking each branch and backtracking.
 
+- Breadth First Search algorithm which searches the nodes of a root but doing so level-by-level instead.
+
+- How to use processing animation
+
+- How to use lists and ArrayLists to represent groups/waves of towers and enemies
+
+- How to use the createShape() function in processing to make custom meshes
+
+- How to use png files as sprites in processing (although we didn't implement it)
 
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- We decided to no longer try to create cool-down powers due to time constraints
 
+- We decided to create a side-panel to access information and to purchase items
+
+- We decided to use custom meshes instead of png sprites for our objects.
 
 
 
@@ -48,7 +68,7 @@ LESSONS LEARNED
 -----------------------------------------------------------------------------
 Kevin Wang :: Added first draft of proposal. Added prelim code in Processing.
 Larry Wong ::
-Alvin Ye ::
+Alvin Ye :: Updated proposal
 =============================================================================
 
 2018-05-29
@@ -62,7 +82,7 @@ Alvin Ye :: Worked on adding details to proposal.
 --------------------------------------------------------
 Kevin Wang :: Initial balloon movement.
 Larry Wong :: Added plan for 2018-05-30, added submodule
-Alvin Ye ::
+Alvin Ye :: Updated plan. Fixed enemy moving pattern
 ========================================================
 
 2018-05-31
@@ -77,47 +97,47 @@ Alvin Ye :: Worked on uml and flowchart
 ______________________________________________
 Kevin Wang :: Created intro animations
 Larry Wong :: Worked on map creation
-Alvin Ye ::
+Alvin Ye :: Added test code
 ==============================================
 
 2018-06-02
 __________________________________________________________
-Kevin Wang ::
+Kevin Wang :: Coded setUp() instructions and added basic methods to classes.
 Larry Wong :: Map creation and map representation complete
-Alvin Ye ::
+Alvin Ye :: Fixed bugs with weapon classes and projectile class.
 ==========================================================
 
 2018-06-03
 _________________________________
 Kevin Wang ::
-Larry Wong ::
-Alvin Ye ::
+Larry Wong :: Added sprites. Updated Devlog.
+Alvin Ye :: Created a new plan. Changed file names/ variables
 =================================
 
 2018-06-04
 ______________________________________________________________________
 Kevin Wang :: Figured out how to shoot projectiles with cooldown time.
 Larry Wong ::
-Alvin Ye ::
+Alvin Ye :: Started the creation of new enemy classes.
 ======================================================================
 
 2018-06-05
 ____________________________________________________________________________________________________
 Kevin Wang :: Brought together title displaying with gameplay. Created shapes for different weapons.
 Larry Wong :: Shortest path algorithm completed (with some errors)
-Alvin Ye ::
+Alvin Ye :: Fixed freezer and tackshooter classes.
 ====================================================================================================
 
 2018-06-06
 ____________________________________________________________________
 Kevin Wang :: Created tack shooter shape. Made tack shooter less OP.
 Larry Wong :: Shortest path errors fixed
-ALvin Ye ::
+ALvin Ye :: Created a tier system for bloons
 ====================================================================
 
 2018-06-07
 ____________________________________________________________________
 Kevin Wang :: Created tack shooter shape. Made tack shooter less OP.
 Larry Wong :: Implemented map and shortest path into main driver
-ALvin Ye ::
+ALvin Ye :: Created bloon wave difficulty system. 
 ====================================================================
