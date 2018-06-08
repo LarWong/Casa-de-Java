@@ -299,11 +299,15 @@ void createEnemies() {
   if (numEnemies != 0) {
     if (millis() - enemyAppeared >= 800) {
 
-      int rand = (int) random(20, 24);
+      int rand = (int) random(20, 28);
       if (rand == 20) enemies.add(new Bloon(75, 75, crimson)); //crimson bloon
       else if (rand == 21) enemies.add(new Bloon(75, 75, sapphire)); //sapphire bloon
       else if (rand == 22) enemies.add(new Bloon(75, 75, moss)); //moss bloon
       else if (rand == 23) enemies.add(new Bloon(75, 75, wood)); //wooden bloon
+      else if (rand == 24) enemies.add(new Bloon(75, 75, rose));
+      else if (rand == 25) enemies.add(new Bloon(75, 75, ice));
+      else if (rand == 26) enemies.add(new Bloon(75, 75, gold));
+      else if (rand == 27) enemies.add(new Bloon(75, 75, silver));
       enemyAppeared = millis();
       numEnemies--;
     }
