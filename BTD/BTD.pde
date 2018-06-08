@@ -257,19 +257,8 @@ void mouseClicked() {
 
     //creates a new weapon upon click if player has enough money
     else { 
-      //temp variables for the path y-coordinates
-      int a = 25;
-      int b = 115;
-      int c = 205;
-      int d = 295;
-      int e = 385;
-
       //if it's on enemy path
-      if ((mouseY > a && mouseY < a + 50) ||
-        (mouseY > b && mouseY < b + 50) ||
-        (mouseY > c && mouseY < c + 50) ||
-        (mouseY > d && mouseY < d + 50) || 
-        (mouseY > e && mouseY < e + 50))
+      if (get(mouseX, mouseY) == color(0,100,0))
         println("INVALID PLACEMENT");
       else {
         if (weaponState == TOWER) {
