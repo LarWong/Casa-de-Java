@@ -14,12 +14,23 @@ OBSTACLES OVERCOME
  - Created multiple functioning classes of player towers that have different effects like the real BTD game. 
 
  - Created a path-creation and path-solving algorithm
+ 
 
 UNRESOLVED ISSUES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-- We have yet to develop a path-solving algorithm for a path that loops back into itself.
+- We have yet to develop a ath-following algorithm for a path that contains a loop.
 
 - Also, we did not have enough time to give the player special cool-down powers, despite hoping to do so in the start
+
+- The balloons move relatively fast compared to the towers
+
+- Towers shoot at time intervals, not when the enemy is near
+
+- Towers do not have upgrades
+
+- The freezer tower does not function as it should (slow the movement of the enemies)
+
+- There is only one round/wave of enemies at the moment
 
 COOL STUFF LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -35,6 +46,8 @@ COOL STUFF LEARNED
 
 - How to use png files as sprites in processing (although we didn't implement it)
 
+- State variables and how to use them for different phases of the game
+
 MID-DEVELOPMENT DESIGN CHANGES
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 - We decided to no longer try to create cool-down powers due to time constraints
@@ -44,9 +57,17 @@ MID-DEVELOPMENT DESIGN CHANGES
 - We decided to use custom meshes instead of png sprites for our objects.
 
 
-
 LESSONS LEARNED
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+- Research is key prior to a project
+
+- Communication is important in order to meet deadlines and to avoid merge conflicts
+
+- Do not be over ambitious, stay modest
+
+- Programs are not as easy as they appear
+
+- Be grateful for the days off to work on the project
   
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -137,7 +158,8 @@ ALvin Ye :: Created a tier system for bloons
 
 2018-06-07
 ____________________________________________________________________
-Kevin Wang :: Created tack shooter shape. Made tack shooter less OP.
-Larry Wong :: Implemented map and shortest path into main driver
-ALvin Ye :: Created bloon wave difficulty system. 
+Kevin Wang :: Created tack shooter shape. Made tack shooter less OP, Worked on path following algo
+Larry Wong :: Implemented map and shortest path into main driver, Worked on path following algo, housekeeping, updated uml/flowchart
+ALvin Ye :: Created bloon wave difficulty system, fixed placement & money problems
 ====================================================================
+
