@@ -11,7 +11,7 @@ class Player {
   //default constructor
   Player() {
     weapons = new ArrayList<Weapon>();
-    money = 100;
+    money = 1000;
     health = 100;
     level = 1;
   }

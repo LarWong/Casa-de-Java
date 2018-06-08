@@ -145,7 +145,12 @@ void setup() {
 void draw() {
 
   clear(); //creates illusion of animation
-
+  if(localPlayer.getHealth() == 0){
+   println("YOU LOST");
+    
+  }
+  
+  
   if (beginning) {
 
     if (titleAppeared == 0) {
