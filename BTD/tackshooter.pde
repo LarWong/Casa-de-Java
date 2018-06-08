@@ -1,45 +1,38 @@
-class tackshooter extends weapon {
+class TackShooter extends Weapon {
 
-  //has these vars inherited from weapon
-  //final static int ALIVE = 0;
+  //inherited vars that are used
   //final static int DEAD = 1;
-  //int state = ALIVE;
-  //int HP;
-  //color c;
   //float xCor, yCor;
-  //float size;
-  //int atck, speed, price;
-  //boolean fired;
+  //int speed, price;
   //int lastFiredTime = millis();
-  //protected ArrayList<projectile> projectiles = new ArrayList<projectile>();
+  //ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
-  tackshooter() {
-    HP = 100;
-    size = 40;
-    atck = 10;
-    speed = 2;
+  TackShooter() {
+    speed = 1;
     price = 100;
   }
 
-  tackshooter(float mX, float mY) {
+  TackShooter(float mX, float mY) {
     this();
     xCor = mX;
     yCor = mY;
   }
-  
-  
-  void atck() {
-    shape(tackshooter, xCor, yCor); //shape of tack shooter
-    for (projectile projectile : projectiles) projectile.move(); //projectiles move
 
-    if (time - lastFiredTime > 12000.0 / speed) { //weapon has certain cooldown
+
+  void atck() {
+
+    shape(tackshooter, xCor, yCor); //shape of tack shooter
+    for (Projectile projectile : projectiles) projectile.move(); //projectiles move
+
+    if (time - lastFiredTime > 4000.0 / speed) { //weapon has certain cooldown
       lastFiredTime = millis();
-      projectiles.add(new projectile(xCor, yCor, speed, atck)); //create a new projectile
-      projectiles.add(new projectile(xCor, yCor, -1 * speed, speed, atck));
-      projectiles.add(new projectile(xCor, yCor, -1 * speed, -1 * speed, atck));
-      projectiles.add(new projectile(xCor, yCor, speed, -1 * speed, atck));
-      projectiles.add(new projectile(xCor, yCor, speed, speed, atck));
-      projectiles.add(new projectile(xCor, yCor, -1 * speed, atck));
+      //create new projectiles in 6 different directions
+      projectiles.add(new Projectile(xCor, yCor, speed));
+      projectiles.add(new Projectile(xCor, yCor, -speed, speed));
+      projectiles.add(new Projectile(xCor, yCor, -speed, -speed));
+      projectiles.add(new Projectile(xCor, yCor, speed, -speed));
+      projectiles.add(new Projectile(xCor, yCor, speed, speed));
+      projectiles.add(new Projectile(xCor, yCor, -speed));
 
       //remove projectiles that are dead
       int i = 0;

@@ -1,27 +1,18 @@
-class tower extends weapon {
+class Tower extends Weapon {
 
-  //has these vars inherited from weapon
-  //final static int ALIVE = 0;
+  //inherited vars that are used
   //final static int DEAD = 1;
-  //int state = ALIVE;
-  //int HP;
-  //color c;
   //float xCor, yCor;
-  //float size;
-  //int atck, speed, price;
-  //boolean fired;
+  //int speed, price;
   //int lastFiredTime = millis();
-  //protected ArrayList<projectile> projectiles = new ArrayList<projectile>();
+  //ArrayList<Projectile> projectiles = new ArrayList<Projectile>();
 
-  tower() {
-    HP = 100;
-    size = 40;
-    atck = 10;
-    speed = 5;
+  Tower() {
+    speed = 3;
     price = 30;
   }
 
-  tower(float mX, float mY) {
+  Tower(float mX, float mY) {
     this();
     xCor = mX;
     yCor = mY;
