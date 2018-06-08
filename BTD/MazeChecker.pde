@@ -14,11 +14,10 @@ class MazeChecker {
 
 
   //initialize constants for map component symbols
-  final private int WALL =         '#';
-  final private int PATH =         '*';
-  final private int THE_EXIT =     '&';
-  final private int CURRENT =      '@';
-  final private int VISITED_PATH = '.';
+  final private char PATH =         '*';
+  final private char THE_EXIT =     '&';
+  final private char CURRENT =      '@';
+  final private char VISITED_PATH = '.';
 
 
 

@@ -20,29 +20,12 @@ Once that is over, the user will be given a screen with directions on how to cre
 
 Enemies start spawning on the upper left cornor of the screen and mave their way through the maze using a path recognition algorithm. The user can place towers, but only on the black pixels. Once a enemy gets close to a tower, the tower shoots at them by creating a projectile that moves linearly. If the projectile comes into contact with the enemy, the enemy "takes damage" by decreasing in size. Once the size is zero, it is considered dead. If the enemies manage to get to the end of the maze, the user loses health. If the health reaches 0, it is a game over.
 
-## Tasks
-
-- [ ] create enemy bloons and algo for movement of bloons following a path
-- [ ] allow for validation of weapons location
-- [ ] allow for upgrading of attacks and defenses
-- [ ] allow for different difficulties
-- [ ] create different shapes to use in game
-- [ ] create maps
-- [ ] allow for reading of `.txt` files
-- [ ] create algo for path finding based on backtracking
 
 ## Installing and Running
-
-To download:
-- You may clone the repository by running `git clone git@github.com:LarWong/Casa-de-Java.git` in a terminal session. You must have git installed to do so. Git downloads may be found [here](https://git-scm.com/downloads).
-- You may download the files as a ZIP directly from this website.
-
-In order to run the game, you must have Processing installed. It is recommended that you have Processing 3. You may find the download files [here](https://processing.org/download/).
-
-Once everything is installed, run Processing and open `BTD.pde`. The game will immediately begin from there.
-
-## Features
+1. Clone this Repo
+2. In order to run the game, you must have Processing installed. It is recommended that you have Processing 3. You may find the download files [here](https://processing.org/download/).
+3. Once everything is installed, run Processing and open `BTD.pde`. The game will immediately begin from there.
 
 ## Bugs
-
-- Player's weapon objects can overlap.
+1. Player's weapon objects can overlap.
+2. If two freezers are two clsoe together, the second freezer's effect does not register.

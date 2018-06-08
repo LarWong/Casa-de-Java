@@ -1,10 +1,12 @@
 //class version of MapCreation for the main driver
 class CreateMap {
 
+  //instance vars
   private int boxsize, cols, rows;
   private Square[][] grid;
   boolean creationDone;
 
+  //constructor
   CreateMap(int worldsizeY, int worldsizeX, int squaresize) {
     boxsize = squaresize;
     boolean creationDone = false;
@@ -113,7 +115,7 @@ class CreateMap {
           creationDone = true;
           PathFinder path = new PathFinder("map.txt");
           //print(path);
-          path.solve("map.txt");
+          path.solve();
           println("good MAP");
         } else {
           println("Invaild MAP");
