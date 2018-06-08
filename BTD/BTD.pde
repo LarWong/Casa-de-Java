@@ -173,12 +173,13 @@ void draw() {
       fill(silver);
       textFont(font24);
       text("How to play", 10, 30);
-      text("You have a task - to survive against waves of enemy bloons as much as you can.", 10, 60);
-      text("Using your allotted money, purchase weapons. Upgrade them if you can.", 10, 90);
-      text("Popping bloons will earn you money.", 10, 120);
-      text("Interact with the icons on the side panel that will appear to purchase, get more info, & upgrade.", 10, 150);
-      text("Look at the console for any messages that will appear during the game.", 10, 180);
-      text("Good luck!", 10, 210);
+      text("First you have to use the map creator to make a custom map for the bloons.", 10,60);
+      text("You have a task - to survive against waves of enemy bloons as much as you can.", 10, 90);
+      text("Using your allotted money, purchase weapons.", 10, 120);
+      text("Popping bloons will earn you money.", 10, 150);
+      text("Interact with the icons on the side panel that will appear to purchase, get more info, & upgrade.", 10, 180);
+      text("Look at the console for any messages that will appear during the game.", 10, 210);
+      text("Good luck!", 10, 240);
 
       text("Press any key to start.", 10, 270);
       if (keyPressed) {
