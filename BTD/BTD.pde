@@ -256,6 +256,7 @@ void mouseClicked() {
         println("place your tack shooter");
         println("======Tack Shooter======\nAttack Speed: Slow\nCost: 100\nShoots 6 projectiles across the screen");
       } else if (mouseX >= 801 && mouseX <= 1000 && mouseY >= 450 && mouseY <= 500) {
+        numEnemies = 10;
         paused = !paused;
       }
     } 
