@@ -272,13 +272,13 @@ void mouseClicked() {
         (mouseY > e && mouseY < e + 50))
         println("INVALID PLACEMENT");
       else {
-        /*if (weaponState == TOWER) {
-         if (localPlayer.getMoney() < 30) return;
-         } else if (weaponState == FREEZER) {
-         if (localPlayer.getMoney() < 70) return;
-         } else if (weaponState == TACKSHOOTER) {
-         if (localPlayer.getMoney() < 100) return;
-         }*/
+        if (weaponState == TOWER) {
+          if (localPlayer.getMoney() < 30) return;
+        } else if (weaponState == FREEZER) {
+          if (localPlayer.getMoney() < 70) return;
+        } else if (weaponState == TACKSHOOTER) {
+          if (localPlayer.getMoney() < 100) return;
+        }
         localPlayer.buy(mouseX, mouseY, weaponState);
       }
     }

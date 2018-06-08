@@ -37,6 +37,12 @@ abstract class Weapon {
         i++;
       }
     }
+    int i = 0;
+    while (i < enemies.size()) { //remove enemies that are dead
+      if (enemies.get(i).getState() == DEAD)
+        enemies.remove(i);
+      i++;
+    }
   }
 
   void upgrade() {

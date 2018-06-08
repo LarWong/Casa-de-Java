@@ -20,21 +20,21 @@ class Bloon extends Enemy {
     yCor = mY;
     c = newColor;
     if (c == silver) {
-      oSpeed = speed = 16;
+      //oSpeed = speed = 10;
     } else if (c == gold) {
-      oSpeed = speed = 12;
+      //oSpeed = speed = 9;
     } else if (c == ice) {
-      oSpeed = speed = 10;
+      //oSpeed = speed = 8;
     } else if (c == rose) {
-      oSpeed = speed = 8;
+      //oSpeed = speed = 7;
     } else if (c == wood) {
-      oSpeed = speed = 4;
+      //oSpeed = speed = 4;
     } else if (c == moss) {
-      oSpeed = speed = 6;
+      //oSpeed = speed = 6;
     } else if (c == sapphire) {
-      oSpeed = speed = 5;
+      //oSpeed = speed = 5;
     } else if (c == crimson) {
-      oSpeed = speed = 4;
+      //oSpeed = speed = 4;
     }
   }
 }

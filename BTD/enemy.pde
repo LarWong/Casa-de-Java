@@ -11,6 +11,7 @@ abstract class Enemy {
   protected float speed;
   protected float oSpeed;
   protected int prevDirection = -1; //0 is up, 1 is down, 2 is left, 3 is right
+  protected int nextDirection = -1;
   protected boolean slowed;
 
   int getState() {
@@ -58,30 +59,23 @@ abstract class Enemy {
   void move() {
 
     if (state != DEAD) {
-      if (checkPath() == 0) {
-        if (abs(xCor - (int) (50 * floor((xCor - 75) / 50.0)) - 75) <= 1) {
-          xCor = (int) (50 * floor((xCor - 75) / 50.0)) + 75;
-          yCor += -speed;
-          prevDirection = 1;
-        }
-      } else if (checkPath() == 1) {
-        if (abs(xCor - (int) (50 * floor((xCor - 75) / 50.0)) - 75) <= 1) {
-          xCor = (int) (50 * floor((xCor - 75) / 50.0)) + 75;
-          yCor += speed;
-          prevDirection = 0;
-        }
-      } else if (checkPath() == 2) {
-        if (abs(yCor - (int) (50 * floor((yCor - 75) / 50.0)) - 75) <= 1) {
-          yCor = (int) (50 * floor((yCor - 75) / 50.0)) + 75;
-          xCor -= speed;
-          prevDirection = 3;
-        }
-      } else if (checkPath() == 3) {
-        if (abs(yCor - (int) (50 * floor((yCor - 75) / 50.0)) - 75) <= 1) {
-          yCor = (int) (50 * floor((yCor - 75) / 50.0)) + 75;
-          xCor += speed;
-          prevDirection = 2;
-        }
+      if ((abs(xCor - (int) (50 * floor((xCor - 75) / 50.0)) - 75) <= 1) && (abs(yCor - (int) (50 * floor((yCor - 75) / 50.0)) - 75) <= 1)) {
+        xCor = (int) (50 * floor((xCor - 75) / 50.0)) + 75;
+        yCor = (int) (50 * floor((yCor - 75) / 50.0)) + 75;
+        nextDirection = checkPath();
+      }
+      if (nextDirection == 0) {
+        prevDirection = 1;
+        yCor += -10;//-speed;
+      } else if (nextDirection == 1) {
+        prevDirection = 0;
+        yCor += 10;//speed;
+      } else if (nextDirection == 2) {
+        prevDirection = 3;
+        xCor += -10;//-speed;
+      } else if (nextDirection == 3) {
+        prevDirection = 2;
+        xCor += 10;//speed;
       }
 
       fill(c);
@@ -104,16 +98,16 @@ abstract class Enemy {
   void pop() {
     if (c == silver) {
       c = gold;
-      oSpeed = speed = 12 * speed;
+      //oSpeed = speed = 9 * speed;
     } else if (c == gold) {
       c = ice;
-      oSpeed = speed = 10 * speed;
+      //oSpeed = speed = 8 * speed;
     } else if (c == ice) {
       c = rose;
-      oSpeed = speed = 8 * speed;
+      //oSpeed = speed = 7 * speed;
     } else if (c == rose) {
       c = moss;
-      oSpeed = speed = 6 * speed;
+      //oSpeed = speed = 6 * speed;
     } else if (c == wood) {
       c = crimson;
     } else state = DEAD;
@@ -130,6 +124,20 @@ abstract class Enemy {
 
       //check if path color matches shortest path
       if (greenAspect == 100) {
+        if (i != prevDirection)
+          return i;
+      }
+    }
+    for (int i = 0; i < directions.length; i++) {
+      color nextTile = get((int) (50 * floor((xCor - 75) / 50.0)) + 75 + directions[i][0], (int) (50 * floor((yCor - 75) / 50.0)) + 75 + directions[i][1]);
+      if (nextTile == crimson ||
+        nextTile == sapphire ||
+        nextTile == moss ||
+        nextTile == wood ||
+        nextTile == rose ||
+        nextTile == ice ||
+        nextTile == gold ||
+        nextTile == silver) {
         if (i != prevDirection)
           return i;
       }
